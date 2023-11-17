@@ -16,7 +16,16 @@ router.get("/", async (req, res) => {
 
 //Create new recipe
 router.post("/", async (req, res) => {
-  const recipe = new RecipesModel(...req.body);
+  const recipe = new RecipesModel({
+    _id: new mongoose.Types.ObjectId(),
+    name: req.body.name,
+    image: req.body.image,
+    ingredients: req.body.ingredients,
+    instructions: req.body.instructions,
+    imageUrl: req.body.imageUrl,
+    cookingTime: req.body.cookingTime,
+    userOwner: req.body.userOwner,
+  });
   try {
     const response = await recipe.save();
     res.json(response);
@@ -42,7 +51,7 @@ router.put("/", async (req, res) => {
 router.get("/savedRecipes/ids", async (req, res) => {
   try {
     const user = await UserModel.findById(req.body.userId);
-    res.json({savedRecipes: user?.savedRecipes});
+    res.json({ savedRecipes: user?.savedRecipes });
   } catch (error) {
     res.json(error);
   }
@@ -53,12 +62,12 @@ router.get("/savedRecipes", async (req, res) => {
   try {
     const user = await UserModel.findById(req.body.userId);
     const savedRecipes = await RecipeModel.find({
-      _id: { $in: user.savedRecipes}
-    })
-    res.json({savedRecipes});
+      _id: { $in: user.savedRecipes },
+    });
+    res.json({ savedRecipes });
   } catch (error) {
     res.json(error);
   }
-})
+});
 
 export { router as recipesRouter };
