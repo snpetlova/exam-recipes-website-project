@@ -1,12 +1,12 @@
 import React from "react";
-import { Register } from "../components/Register";
-import { Login } from "../components/Login";
+// import { Register } from "../components/Register";
+// import { Login } from "../components/Login";
 
 function Auth() {
   return (
     <div className="auth">
-      <Login />
-      <Register />
+      {/* <Login />
+      <Register /> */}
     </div>
   );
 }

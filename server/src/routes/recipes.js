@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { RecipesModel } from "../models/Recipes.js";
 import { UserModel } from "../models/Users.js";
+import { verifyToken } from './users.js';
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ router.get("/", async (req, res) => {
 });
 
 //Create new recipe
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
   const recipe = new RecipesModel({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
@@ -35,7 +36,7 @@ router.post("/", async (req, res) => {
 });
 
 //Save recipe to a certain user
-router.put("/", async (req, res) => {
+router.put("/", verifyToken, async (req, res) => {
   try {
     const recipe = await RecipesModel.findById(req.body.recipeId);
     const user = await UserModel.findById(req.body.userId);
