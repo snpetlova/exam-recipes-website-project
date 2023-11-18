@@ -7,6 +7,35 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+.card-img.landing {
+  margin-top: 1em;
+}
+
+.detailsBtn.btn.btn-primary {
+  margin-left: 0.3em;
+  --bs-btn-bg: rgb(198, 72, 16);
+  --bs-btn-border-color: rgb(198, 72, 16);
+  --bs-btn-hover-bg: rgb(153, 59, 16); 
+  --bs-btn-hover-border-color: rgb(188, 66, 11);
+  --bs-btn-active-bg: rgb(188, 66, 11);
+  --bs-btn-active-border-color: rgb(188, 66, 11);
+}
+
+.card-img.welcome {
+  margin-bottom: 5em;
+}
+
+/* p.welcome-text {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 5em;
+  text-align-last: center;
+} */
+
 .recipe-cards {
   display: flex;
   flex-wrap: wrap;
@@ -14,7 +43,17 @@
   margin-left: 4em;
 }
 
-.recipe-cards >* {
+.card-img-top {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card {
+  margin-top: 1em;
+}
+
+.recipe-cards > * {
   margin-bottom: 1em;
   margin-left: 1em;
   margin-top: 1em;

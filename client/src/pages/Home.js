@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getUserId } from "../hooks/getUserId";
 import { useCookies } from "react-cookie";
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import landing from "../assets/landing.jpg";
+import welcome from "../assets/welcome.jpg";
+import Button from "react-bootstrap/Button";
 
 export const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -55,9 +61,16 @@ export const Home = () => {
     Array.isArray(savedRecipes) && savedRecipes.includes(id);
 
   return (
-    <div className="box">
-    <h1>Recipes</h1>
-    <div>
+    <div className="welcome">
+      <Card style={{ border: "none" }}>
+        <Card.Img src={landing} alt="Card image" className="landing" />
+        <Card.Img src={welcome} alt="Card image" className="welcome" />
+        <Card.ImgOverlay></Card.ImgOverlay>
+        <Card.Text></Card.Text>
+      </Card>
+      <div className="box">
+        <h1>Recipes</h1>
+        {/* <div>
       <ul className="recipe-cards">
         {recipes.map((recipe) => (
           <li key={recipe._id}>
@@ -72,13 +85,37 @@ export const Home = () => {
             </div>
             <div className="instructions">
               <p>{recipe.instructions}</p>
-            </div>
+            </div>  
             <img src={recipe.imageUrl} alt={recipe.name} />
             <p>Cooking Time: {recipe.cookingTime} minutes</p>
           </li>
         ))}
       </ul>
-    </div>
+    </div> */}
+
+        <Row xs={1} md={3} className="g-4">
+          {recipes.map((recipe) => (
+            <Col key={recipe._id}>
+              <Card>
+                <Card.Img variant="top" src={recipe.imageUrl} />
+                <Card.Body>
+                  <Card.Title>{recipe.name}</Card.Title>
+                  <Card.Text>{recipe.instructions}</Card.Text>
+                  <p>Cooking Time: {recipe.cookingTime} minutes</p>
+                  <Button
+                    variant="secondary"
+                    onClick={() => saveRecipe(recipe._id)}
+                    disabled={isRecipeSaved(recipe._id)}
+                  >
+                    {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
+                  </Button>
+                  <Button variant="primary" className="detailsBtn">Details</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
     </div>
   );
 };
