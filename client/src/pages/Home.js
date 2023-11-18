@@ -55,9 +55,10 @@ export const Home = () => {
     Array.isArray(savedRecipes) && savedRecipes.includes(id);
 
   return (
+    <div className="box">
+    <h1>Recipes</h1>
     <div>
-      <h1>Recipes</h1>
-      <ul>
+      <ul className="recipe-cards">
         {recipes.map((recipe) => (
           <li key={recipe._id}>
             <div>
@@ -77,6 +78,7 @@ export const Home = () => {
           </li>
         ))}
       </ul>
+    </div>
     </div>
   );
 };

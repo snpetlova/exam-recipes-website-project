@@ -7,6 +7,7 @@ import Saved from "./pages/Saved";
 import { Navbar } from './components/Navbar';
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
