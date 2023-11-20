@@ -3,6 +3,7 @@ import { Form } from "../pages/Auth";
 import { useCookies } from "react-cookie";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import loginImg from "../assets/loginImg.png";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -30,6 +31,11 @@ export const Login = () => {
   };
 
   return (
+    <div className="login">
+      <div className="leftSide-login">
+        <img src={loginImg}></img>
+      </div>
+      <div className="rightSide-login">
     <Form
       username={username}
       setUsername={setUsername}
@@ -38,5 +44,7 @@ export const Login = () => {
       label="Login"
       onSubmit={onSubmit}
     />
+    </div>
+    </div>
   );
 };
