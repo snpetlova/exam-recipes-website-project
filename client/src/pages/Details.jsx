@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
-import { useCookies } from "react-cookie";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export const Details = ( onDelete ) => {
+export const Details = (onDelete) => {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,11 +49,13 @@ export const Details = ( onDelete ) => {
       setDeleting(true);
 
       await axios.delete(`http://localhost:3001/recipes/${recipeIdToDelete}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
-        data: { userId }, 
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+        data: { userId },
       });
-      alert('Deleted succesfully!')
-      navigate('/')
+      alert("Deleted succesfully!");
+      navigate("/");
 
       onDelete();
     } catch (error) {
@@ -83,13 +85,30 @@ export const Details = ( onDelete ) => {
               <Card.Title style={{ fontSize: "30px", marginBottom: "30px" }}>
                 {recipe.name}
               </Card.Title>
-              <Card.Text>Instructions: {recipe.instructions}</Card.Text>
               <Card.Text>
                 Ingredients: {recipe.ingredients.join(", ")}
               </Card.Text>
+              <Card.Text>Instructions: {recipe.instructions}</Card.Text>
               <Card.Text>Cooking time: {recipe.cookingTime} minutes</Card.Text>
-              {isOwner && (<Button variant="primary" className="editBtn">Edit</Button> )}
-              {isOwner && (<Button variant="danger" className="deleteBtn" onClick={() => handleDelete(recipeId)}>Delete</Button> )}  
+              {isOwner && (
+                <Button variant="primary" className="editBtn">
+                  <Link
+                    to={`/recipes/${recipe._id}/edit`}
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    Edit
+                  </Link>
+                </Button>
+              )}
+              {isOwner && (
+                <Button
+                  variant="danger"
+                  className="deleteBtn"
+                  onClick={() => handleDelete(recipeId)}
+                >
+                  Delete
+                </Button>
+              )}
             </Card.Body>
           </div>
         </div>

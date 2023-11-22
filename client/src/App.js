@@ -4,11 +4,12 @@ import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Create from "./pages/Create";
 import Saved from "./pages/Saved";
-import { Navbar } from './components/Navbar';
-import { Footer } from './components/Footer';
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { Details } from "./pages/Details";
+import { Edit } from "./pages/Edit";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -24,9 +25,10 @@ function App() {
           <Route path="/create-recipe" element={<Create />} />
           <Route path="/saved-recipes" element={<Saved />} />
           <Route path="/recipes/:recipeId" element={<Details />} />
+          <Route path="/recipes/:recipeId/edit" element={<Edit />} />
         </Routes>
         <Footer />
-      </Router> 
+      </Router>
     </div>
   );
 }

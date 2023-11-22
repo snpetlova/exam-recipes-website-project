@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { RecipesModel } from "../models/Recipes.js";
 import { UserModel } from "../models/Users.js";
-import { verifyToken } from './users.js';
+import { verifyToken } from "./users.js";
 
 const router = express.Router();
 
@@ -66,29 +66,31 @@ router.get("/savedRecipes/:userId", async (req, res) => {
       _id: { $in: user.savedRecipes },
     });
     res.json({ savedRecipes });
-  } catch (error) { 
+  } catch (error) {
     res.json(error);
   }
 });
 
 //Get recipes details
-router.get('/:recipeId', async (req, res) => {
+router.get("/:recipeId", async (req, res) => {
   try {
     const recipe = await RecipesModel.findById(req.params.recipeId);
-    if(!recipe) {
-      return res.status(404).json({message: 'Recipe not found'});
+    if (!recipe) {
+      return res.status(404).json({ message: "Recipe not found" });
     }
     res.json(recipe);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server Error' });
+    res.status(500).json({ message: "Server Error" });
   }
 });
 
 //Delete recipe
 router.delete("/:recipeId", async (req, res) => {
   try {
-    const deletedRecipe = await RecipesModel.findByIdAndDelete(req.params.recipeId);
+    const deletedRecipe = await RecipesModel.findByIdAndDelete(
+      req.params.recipeId
+    );
 
     if (!deletedRecipe) {
       return res.status(404).json({ error: "Recipe not found" });
@@ -97,6 +99,26 @@ router.delete("/:recipeId", async (req, res) => {
     res.json({ message: "Recipe deleted successfully", deletedRecipe });
   } catch (error) {
     console.error("Error deleting recipe:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+//Edit recipe
+router.put("/:recipeId", async (req, res) => {
+  try {
+    const updatedRecipe = await RecipesModel.findByIdAndUpdate(
+      req.params.recipeId,
+      req.body,
+      { new: true }
+    );
+
+    if (!updatedRecipe) {
+      return res.status(404).json({ error: "Recipe not found" });
+    }
+
+    res.json({ message: "Recipe updated successfully", updatedRecipe });
+  } catch (error) {
+    console.error("Error updating recipe:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
