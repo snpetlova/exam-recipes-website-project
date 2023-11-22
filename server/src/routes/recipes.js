@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 });
 
 //Create new recipe
-router.post("/", verifyToken, async (req, res) => {
+router.post("/", async (req, res) => {
   const recipe = new RecipesModel({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
@@ -40,7 +40,7 @@ router.put("/", verifyToken, async (req, res) => {
   try {
     const recipe = await RecipesModel.findById(req.body.recipeId);
     const user = await UserModel.findById(req.body.userId);
-    user.savedRecipes.push(recipe);
+    user.savedRecipes.push(recipe._id);
     await user.save();
     res.json({ savedRecipes: user.savedRecipes });
   } catch (error) {
@@ -83,6 +83,22 @@ router.get('/:recipeId', async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Server Error' });
   }
-})
+});
+
+//Delete recipe
+router.delete("/:recipeId", async (req, res) => {
+  try {
+    const deletedRecipe = await RecipesModel.findByIdAndDelete(req.params.recipeId);
+
+    if (!deletedRecipe) {
+      return res.status(404).json({ error: "Recipe not found" });
+    }
+
+    res.json({ message: "Recipe deleted successfully", deletedRecipe });
+  } catch (error) {
+    console.error("Error deleting recipe:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 export { router as recipesRouter };

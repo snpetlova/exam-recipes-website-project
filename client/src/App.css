@@ -222,7 +222,7 @@ textarea {
   align-items: center;
   flex-direction: column;
   padding-top: 10px;
-  margin-top: 1.5em;
+  margin-top: 1.5em; 
 }
 
 .socialMedia svg {
@@ -264,7 +264,7 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 77vh;
+  height: 81.9vh;
 }
 
 .recipe-details-content {

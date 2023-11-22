@@ -56,3 +56,20 @@ export const verifyToken = (req, res, next) => {
     res.sendStatus(401);
   }
 };
+
+// const verifyToken = (req, res, next) => {
+//   const token = req.header('Authorization');
+
+//   if (!token) {
+//     return res.status(401).json({ message: 'Unauthorized' });
+//   }
+
+//   jwt.verify(token, 'secret', (err, user) => {
+//     if (err) {
+//       return res.status(403).json({ message: 'Forbidden' });
+//     }
+
+//     req.user = user;
+//     next();
+//   });
+// };
