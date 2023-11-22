@@ -1,11 +1,7 @@
 // HOME
 -Edit functionality
 -Hide save button if not logged in
--DETAILS PAGE: Edit and Delete Buttons for userOwners only
-
-//CREATE
--Better UI
--Think about the ingredients section
+-EDIT UI
 
 //SAVED
 -Better UI

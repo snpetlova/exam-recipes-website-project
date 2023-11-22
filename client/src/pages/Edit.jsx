@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import editLeft from "../assets/editLeft.jpg";
+import Button from "react-bootstrap/Button";
 
 export const Edit = ({ onEdit }) => {
   const { recipeId } = useParams();
@@ -53,21 +55,47 @@ export const Edit = ({ onEdit }) => {
           data: { userId },
         }
       );
-      
+
       alert("Edited succesfully!");
       navigate(`/recipes/${recipeId}`);
       onEdit();
-     
     } catch (error) {
       console.error("Error updating recipe:", error);
     }
   };
 
+  const handleIngredientChange = (e, idx) => {
+    const { value } = e.target;
+    setEditedRecipe((prevRecipe) => {
+      const updatedIngredients = [...prevRecipe.ingredients];
+      updatedIngredients[idx] = value;
+      return { ...prevRecipe, ingredients: updatedIngredients };
+    });
+  };
+
+  const handleAddIngredient = () => {
+    setEditedRecipe((prevRecipe) => ({
+      ...prevRecipe,
+      ingredients: [...prevRecipe.ingredients, ""],
+    }));
+  };
+
+  const handleRemoveIngredient = (idx) => {
+    setEditedRecipe((prevRecipe) => {
+      const updatedIngredients = [...prevRecipe.ingredients];
+      updatedIngredients.splice(idx, 1);
+      return { ...prevRecipe, ingredients: updatedIngredients };
+    });
+  };
+
   return (
-    <div>
-      <form id="edit" onSubmit={handleEdit}>
-        <div className="container-edit">
-          <h1>Edit Recipe</h1>
+    <div className="edit-container">
+      <div className="leftSide">
+        <img src={editLeft}></img>
+      </div>
+      <div className="rightSide">
+        <h3>Edit Recipe</h3>
+        <form className="editForm" onSubmit={handleEdit}>
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -77,13 +105,31 @@ export const Edit = ({ onEdit }) => {
             onChange={handleChange}
           />
 
-          <label htmlFor="ingredients">Ingredients:</label>
-          <input
-            id="ingredients"
-            name="ingredients"
-            value={editedRecipe.ingredients}
-            onChange={handleChange}
-          />
+          <label htmlFor="ingredients">Ingredients</label>
+          {editedRecipe.ingredients.map((ingredient, idx) => (
+            <div key={idx}>
+              <input
+                type="text"
+                name="ingredients"
+                value={ingredient}
+                onChange={(e) => handleIngredientChange(e, idx)}
+              />
+              <Button
+                variant="outline-danger"
+                className="ingredientsBtn-remove"
+                onClick={() => handleRemoveIngredient(idx)}
+              >
+                Remove
+              </Button>
+            </div>
+          ))}
+          <Button
+            variant="secondary"
+            className="ingredientsBtn"
+            onClick={handleAddIngredient}
+          >
+            Add Ingredient
+          </Button>
 
           <label htmlFor="instructions">Instructions:</label>
           <textarea
@@ -108,10 +154,11 @@ export const Edit = ({ onEdit }) => {
             value={editedRecipe.imageUrl}
             onChange={handleChange}
           />
-
-          <button type="submit">Save Changes</button>
-        </div>
-      </form>
+          <Button type="sumbit" variant="dark" className="submitBtn">
+            Save Changes
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };

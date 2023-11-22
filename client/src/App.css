@@ -149,6 +149,12 @@ textarea {
   align-items: center;
 }
 
+.edit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .leftSide {
   flex: 1;
   padding: 20px;
@@ -181,8 +187,24 @@ textarea {
   margin-bottom: 10px;
 }
 
+.editForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.editForm label,
+.editForm textarea,
+.editForm input {
+  margin-bottom: 10px;
+}
+
 .submitBtn {
   margin-top: 10px;
+}
+
+.ingredientsBtn-remove {
+  margin-left: 1em;
+  margin-bottom: 0.4em;
 }
 
 .logout {
