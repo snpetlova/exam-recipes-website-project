@@ -1,8 +1,7 @@
 // HOME
--Better UI, heading text then all Recipes
 -Edit functionality
 -Hide save button if not logged in
--DETAILS PAGE
+-DETAILS PAGE: Edit and Delete Buttons for userOwners only
 
 //CREATE
 -Better UI
@@ -19,5 +18,4 @@
 
 //SAVE NOT WORKING ON OTHER USERS
 
-<!-- HTML !-->
-<button class="button-2" role="button">Button 2</button>
+

@@ -8,6 +8,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
+import { Details } from "./pages/Details";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/create-recipe" element={<Create />} />
           <Route path="/saved-recipes" element={<Saved />} />
+          <Route path="/recipes/:recipeId" element={<Details />} />
         </Routes>
         <Footer />
       </Router> 

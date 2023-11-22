@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import landing from "../assets/landing.jpg";
 import welcome from "../assets/welcome.jpg";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -100,7 +101,6 @@ export const Home = () => {
                 <Card.Img variant="top" src={recipe.imageUrl} />
                 <Card.Body>
                   <Card.Title>{recipe.name}</Card.Title>
-                  <Card.Text>{recipe.instructions}</Card.Text>
                   <p>Cooking Time: {recipe.cookingTime} minutes</p>
                   <Button
                     variant="secondary"
@@ -109,7 +109,9 @@ export const Home = () => {
                   >
                     {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
                   </Button>
-                  <Button variant="primary" className="detailsBtn">Details</Button>
+                  <Button variant="primary" className="detailsBtn">
+                    <Link to={`/recipes/${recipe._id}`} style={{ color: 'white', textDecoration: 'none' }}>Details</Link>
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>
