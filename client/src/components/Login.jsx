@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Form } from "../pages/Auth";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

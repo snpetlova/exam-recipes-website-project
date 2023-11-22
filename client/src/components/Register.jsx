@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Form } from "../pages/Auth";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import registerImg from "../assets/registerImg.png";
