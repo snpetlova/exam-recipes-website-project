@@ -276,12 +276,40 @@ textarea {
   border-radius: 10px; 
 }
 
+.leftSide-register {
+  flex: 1;
+  padding: 20px;
+}
+
+.leftSide-register img {
+  width: 100%;
+  height: auto; 
+  border-radius: 10px; 
+}
+
 .rightSide-login {
   flex: 1;
   padding: 20px;
   background-color: #f8f9fa; 
 }
 
+.rightSide-register {
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f9fa; 
+}
+
+.login-link {
+  margin-top: 1em;
+}
+
+.register-link {
+  margin-top: 1em;
+}
+
+.loginRegLabel {
+  margin-bottom: 1em;
+}
 .recipe-details-container {
   display: flex;
   justify-content: center;

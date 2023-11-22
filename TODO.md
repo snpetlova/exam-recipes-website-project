@@ -1,7 +1,5 @@
 // HOME
--Edit functionality
 -Hide save button if not logged in
--EDIT UI
 
 //SAVED
 -Better UI
@@ -13,5 +11,11 @@
 //404 PAGE
 
 //SAVE NOT WORKING ON OTHER USERS
+
+//CHECK AUTHENTICATION
+
+//FIX FOOTER
+
+//VALIDATIONS
 
 

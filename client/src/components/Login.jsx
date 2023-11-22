@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Form } from "../pages/Auth";
 import { useCookies } from "react-cookie";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import loginImg from "../assets/loginImg.png";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const [_, setCookies] = useCookies(['access_token']);
-  
+  const [_, setCookies] = useCookies(["access_token"]);
+
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
@@ -21,10 +23,10 @@ export const Login = () => {
         username,
         password,
       });
-      
+
       setCookies("access_token", response.data.token);
-      window.localStorage.setItem('userId', response.data.userId);
-      navigate('/');
+      window.localStorage.setItem("userId", response.data.userId);
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
@@ -36,15 +38,44 @@ export const Login = () => {
         <img src={loginImg}></img>
       </div>
       <div className="rightSide-login">
-    <Form
-      username={username}
-      setUsername={setUsername}
-      password={password}
-      setPassword={setPassword}
-      label="Login"
-      onSubmit={onSubmit}
-    />
-    </div>
+        <div className="auth-container">
+          <form onSubmit={onSubmit}>
+            <h2 className="loginRegLabel">Login</h2>
+            <div className="form-group">
+              <label htmlFor="username" value={username}>
+                Username:
+              </label>
+              <input
+                type="text"
+                id="username"
+                onChange={(event) => setUsername(event.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password" value={password}>
+                Password:
+              </label>
+              <input
+                type="password"
+                id="password"
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </div>
+            <Button type="sumbit" variant="dark" className="loginBtn">
+              Login
+            </Button>
+            <p className="login-link">
+              You don't have an account? 
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                to="/register"
+              >
+                <span> Register</span>
+              </Link>
+            </p>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
