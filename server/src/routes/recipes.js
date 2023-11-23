@@ -36,11 +36,27 @@ router.post("/", async (req, res) => {
 });
 
 //Save recipe to a certain user
-router.put("/", verifyToken, async (req, res) => {
+router.put("/", async (req, res) => {
   try {
     const recipe = await RecipesModel.findById(req.body.recipeId);
     const user = await UserModel.findById(req.body.userId);
     user.savedRecipes.push(recipe._id);
+    await user.save();
+    res.json({ savedRecipes: user.savedRecipes });
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+// Unsave a recipe for a user
+router.delete("/", async (req, res) => {
+  try {
+    const recipe = await RecipesModel.findById(req.body.recipeId);
+    const user = await UserModel.findById(req.body.userId);
+    
+    // Remove the recipe ID from the user's savedRecipes 
+    user.savedRecipes = user.savedRecipes.filter(savedRecipeId => savedRecipeId.toString() !== req.body.recipeId);
+
     await user.save();
     res.json({ savedRecipes: user.savedRecipes });
   } catch (error) {

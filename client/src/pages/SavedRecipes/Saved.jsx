@@ -12,6 +12,8 @@ function Saved() {
   const [savedRecipes, setSavedRecipes] = useState([]);
   const userId = getUserId();
 
+  console.log(savedRecipes);
+
   useEffect(() => {
     const fetchSavedRecipes = async () => {
       try {
@@ -30,21 +32,6 @@ function Saved() {
   return (
     <div className="box">
       <h1>Saved Recipes</h1>
-      {/* <div>
-      <ul className="recipe-cards">
-        {savedRecipes?.map((recipe) => (
-          <li key={recipe._id}>
-            <div>
-              <h2>{recipe.name}</h2>
-            </div>
-            <p>{recipe.description}</p>
-            <img src={recipe.imageUrl} alt={recipe.name} />
-            <p>Cooking Time: {recipe.cookingTime} minutes</p>
-          </li>
-        ))}
-      </ul>
-    </div> */}
-
       <Row xs={1} md={3} className="g-4">
         {savedRecipes.map((recipe) => (
           <Col key={recipe._id}>

@@ -9,7 +9,7 @@ import landing from "../../assets/landing.jpg";
 import welcome from "../../assets/welcome.jpg";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import './Home.css';
+import "./Home.css";
 
 export const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -53,6 +53,21 @@ export const Home = () => {
         },
         { headers: { authorization: cookies.access_token } }
       );
+
+      console.log(response);
+
+      setSavedRecipes(response.data.savedRecipes);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const unsaveRecipe = async (recipeId) => {
+    try {
+      const response = await axios.delete("http://localhost:3001/recipes", {
+        data: { recipeId, userId },
+        headers: { authorization: cookies.access_token },
+      });
       setSavedRecipes(response.data.savedRecipes);
     } catch (err) {
       console.log(err);
@@ -103,15 +118,34 @@ export const Home = () => {
                 <Card.Body>
                   <Card.Title>{recipe.name}</Card.Title>
                   <p>Cooking Time: {recipe.cookingTime} minutes</p>
-                  <Button
+                  {/* <Button
                     variant="secondary"
                     onClick={() => saveRecipe(recipe._id)}
                     disabled={isRecipeSaved(recipe._id)}
                   >
                     {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
+                  </Button> */}
+
+                  <Button
+                    variant="secondary"
+                    onClick={() => {
+                      if (isRecipeSaved(recipe._id)) {
+                        unsaveRecipe(recipe._id);
+                      } else {
+                        saveRecipe(recipe._id);
+                      }
+                    }}
+                  >
+                    {isRecipeSaved(recipe._id) ? "Unsave" : "Save"}
                   </Button>
+
                   <Button variant="primary" className="detailsBtn">
-                    <Link to={`/recipes/${recipe._id}`} style={{ color: 'white', textDecoration: 'none' }}>Details</Link>
+                    <Link
+                      to={`/recipes/${recipe._id}`}
+                      style={{ color: "white", textDecoration: "none" }}
+                    >
+                      Details
+                    </Link>
                   </Button>
                 </Card.Body>
               </Card>
