@@ -7,15 +7,6 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.editBtn.btn.btn-primary {
-  margin-right: 0.3em;
-  margin-top: 1em;
-}
-
-.deleteBtn.btn.btn-danger {
-  margin-top: 1em;
-}
-
 .recipe-cards {
   display: flex;
   flex-wrap: wrap;
@@ -66,77 +57,4 @@ input {
 
 textarea {
   border-radius: 5px;
-}
-
-.recipe-details-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 81.9vh;
-}
-
-.recipe-details-content {
-  display: flex;
-}
-
-.recipe-details-image {
-  flex-shrink: 0;
-  margin-right: 20px;
-}
-
-.recipe-details-info {
-  flex-grow: 1;
-}
-
-
-
-.register {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.leftSide-register {
-  flex: 1;
-  padding: 20px;
-}
-
-.leftSide-register img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.rightSide-register {
-  flex: 1;
-  padding: 20px;
-  background-color: #faf9f8;
-}
-
-.register-link {
-  margin-top: 1em;
-}
-
-.loginRegLabel {
-  margin-bottom: 1em;
-}
-
-.auth-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  margin: 20px;
-  width: 400px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
 }
