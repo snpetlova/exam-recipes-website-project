@@ -1,16 +1,9 @@
-// HOME
--Hide save button if not logged in
 
 //SAVED
 -Better UI
--Unsave functionality
 
 //DETAILS
--Ingredients on sepatate ways
-
-//EDIT
--Go back button
-
+-Ingredients on sepatate rows
 
 //CHECK AUTHENTICATION
 

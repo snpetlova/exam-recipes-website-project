@@ -75,6 +75,8 @@ export const Home = () => {
   const isRecipeSaved = (id) =>
     Array.isArray(savedRecipes) && savedRecipes.includes(id);
 
+  const isLoggedIn = window.localStorage.getItem("userId") !== null; 
+
   return (
     <div className="welcome">
       <Card style={{ border: "none" }}>
@@ -94,7 +96,7 @@ export const Home = () => {
                 <Card.Body>
                   <Card.Title>{recipe.name}</Card.Title>
                   <p>Cooking Time: {recipe.cookingTime} minutes</p>
-                  <Button
+                  {isLoggedIn && ( <Button
                     variant="secondary"
                     onClick={() => {
                       if (isRecipeSaved(recipe._id)) {
@@ -105,7 +107,7 @@ export const Home = () => {
                     }}
                   >
                     {isRecipeSaved(recipe._id) ? "Unsave" : "Save"}
-                  </Button>
+                  </Button> )}
 
                   <Button variant="primary" className="detailsBtn">
                     <Link

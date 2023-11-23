@@ -64,6 +64,10 @@ export const Details = (onDelete) => {
     }
   };
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="recipe-details-container">
       <Card style={{ width: "1000px" }} border="0">
@@ -117,6 +121,13 @@ export const Details = (onDelete) => {
                   Delete
                 </Button>
               )}
+              <Button
+                variant="secondary"
+                className="goBackBtn"
+                onClick={handleGoBack}
+              >
+                ← Go Back
+              </Button>
             </Card.Body>
           </div>
         </div>
