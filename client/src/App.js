@@ -9,6 +9,7 @@ import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
 import { Details } from "./pages/RecipeDetails/Details";
 import { Edit } from "./pages/EditRecipe/Edit";
+import { NotFound } from "./components/404/404";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/saved-recipes" element={<Saved />} />
           <Route path="/recipes/:recipeId" element={<Details />} />
           <Route path="/recipes/:recipeId/edit" element={<Edit />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />
       </Router>

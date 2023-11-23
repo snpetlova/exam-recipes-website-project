@@ -6,13 +6,11 @@
 -Unsave functionality
 
 //DETAILS
--Bold first word
 -Ingredients on sepatate ways
 
 //EDIT
 -Go back button
 
-//404 PAGE
 
 //CHECK AUTHENTICATION
 
@@ -22,6 +20,6 @@
 
 //ROUTE GUARDS
 
-//SEPARATE CSS FILES
+//HOST THE SITE
 
 

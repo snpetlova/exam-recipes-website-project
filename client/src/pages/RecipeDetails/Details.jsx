@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import './Details.css';
+import "./Details.css";
 
 export const Details = (onDelete) => {
   const { recipeId } = useParams();
@@ -87,10 +87,17 @@ export const Details = (onDelete) => {
                 {recipe.name}
               </Card.Title>
               <Card.Text>
-                Ingredients: {recipe.ingredients.join(", ")}
+                <span style={{ fontWeight: "bold" }}>Ingredients:</span>{" "}
+                {recipe.ingredients.join(", ")}
               </Card.Text>
-              <Card.Text>Instructions: {recipe.instructions}</Card.Text>
-              <Card.Text>Cooking time: {recipe.cookingTime} minutes</Card.Text>
+              <Card.Text>
+                <span style={{ fontWeight: "bold" }}>Instructions:</span>{" "}
+                {recipe.instructions}
+              </Card.Text>
+              <Card.Text>
+                <span style={{ fontWeight: "bold" }}>Cooking time:</span>{" "}
+                {recipe.cookingTime} minutes
+              </Card.Text>
               {isOwner && (
                 <Button variant="primary" className="editBtn">
                   <Link
