@@ -54,8 +54,6 @@ export const Home = () => {
         { headers: { authorization: cookies.access_token } }
       );
 
-      console.log(response);
-
       setSavedRecipes(response.data.savedRecipes);
     } catch (err) {
       console.log(err);
@@ -87,28 +85,6 @@ export const Home = () => {
       </Card>
       <div className="box">
         <h1>Recipes</h1>
-        {/* <div>
-      <ul className="recipe-cards">
-        {recipes.map((recipe) => (
-          <li key={recipe._id}>
-            <div>
-              <h2>{recipe.name}</h2>
-              <button
-                onClick={() => saveRecipe(recipe._id)}
-                disabled={isRecipeSaved(recipe._id)}
-              >
-                {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
-              </button>
-            </div>
-            <div className="instructions">
-              <p>{recipe.instructions}</p>
-            </div>  
-            <img src={recipe.imageUrl} alt={recipe.name} />
-            <p>Cooking Time: {recipe.cookingTime} minutes</p>
-          </li>
-        ))}
-      </ul>
-    </div> */}
 
         <Row xs={1} md={3} className="g-4">
           {recipes.map((recipe) => (
@@ -118,14 +94,6 @@ export const Home = () => {
                 <Card.Body>
                   <Card.Title>{recipe.name}</Card.Title>
                   <p>Cooking Time: {recipe.cookingTime} minutes</p>
-                  {/* <Button
-                    variant="secondary"
-                    onClick={() => saveRecipe(recipe._id)}
-                    disabled={isRecipeSaved(recipe._id)}
-                  >
-                    {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
-                  </Button> */}
-
                   <Button
                     variant="secondary"
                     onClick={() => {

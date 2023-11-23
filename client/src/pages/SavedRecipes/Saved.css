@@ -14,3 +14,11 @@
   --bs-btn-active-bg: rgb(188, 66, 11);
   --bs-btn-active-border-color: rgb(188, 66, 11);
 }
+
+.unsave-btn {
+  margin-left: 0.5em;
+}
+
+.col {
+  min-width: 20em;
+}
