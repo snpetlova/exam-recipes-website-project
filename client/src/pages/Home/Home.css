@@ -1,0 +1,24 @@
+.card-img.landing {
+  margin-top: 1em;
+}
+
+.card-img.welcome {
+  margin-bottom: 5em;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.detailsBtn.btn.btn-primary {
+  margin-left: 0.3em;
+  --bs-btn-bg: rgb(198, 72, 16);
+  --bs-btn-border-color: rgb(198, 72, 16);
+  --bs-btn-hover-bg: rgb(153, 59, 16);
+  --bs-btn-hover-border-color: rgb(188, 66, 11);
+  --bs-btn-active-bg: rgb(188, 66, 11);
+  --bs-btn-active-border-color: rgb(188, 66, 11);
+}

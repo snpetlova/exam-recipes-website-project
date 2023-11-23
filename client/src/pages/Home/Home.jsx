@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { getUserId } from "../hooks/getUserId";
+import { getUserId } from "../../hooks/getUserId";
 import { useCookies } from "react-cookie";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import landing from "../assets/landing.jpg";
-import welcome from "../assets/welcome.jpg";
+import landing from "../../assets/landing.jpg";
+import welcome from "../../assets/welcome.jpg";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import './Home.css';
 
 export const Home = () => {
   const [recipes, setRecipes] = useState([]);

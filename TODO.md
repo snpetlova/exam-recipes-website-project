@@ -5,17 +5,23 @@
 -Better UI
 -Unsave functionality
 
-//REGISTER
--More fields
+//DETAILS
+-Bold first word
+-Ingredients on sepatate ways
+
+//EDIT
+-Go back button
 
 //404 PAGE
-
-//SAVE NOT WORKING ON OTHER USERS
 
 //CHECK AUTHENTICATION
 
 //FIX FOOTER
 
 //VALIDATIONS
+
+//ROUTE GUARDS
+
+//SEPARATE CSS FILES
 
 

@@ -1,14 +1,14 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Create from "./pages/Create";
-import Saved from "./pages/Saved";
-import { Navbar } from "./components/Navbar";
-import { Footer } from "./components/Footer";
-import { Login } from "./components/Login";
-import { Register } from "./components/Register";
-import { Details } from "./pages/Details";
-import { Edit } from "./pages/Edit";
+import Home from "./pages/Home/Home";
+import Create from "./pages/CreateRecipe/Create";
+import Saved from "./pages/SavedRecipes/Saved";
+import { Navbar } from "./components/Navbar/Navbar";
+import { Footer } from "./components/Footer/Footer";
+import { Login } from "./components/Login/Login";
+import { Register } from "./components/Register/Register";
+import { Details } from "./pages/RecipeDetails/Details";
+import { Edit } from "./pages/EditRecipe/Edit";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {

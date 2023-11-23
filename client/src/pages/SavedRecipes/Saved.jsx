@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUserId } from "../hooks/getUserId";
+import { getUserId } from "../../hooks/getUserId";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";

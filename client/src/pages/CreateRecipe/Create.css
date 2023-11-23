@@ -1,0 +1,49 @@
+.create-recipe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leftSide {
+  flex: 1;
+  padding: 20px;
+}
+
+.leftSide img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.rightSide {
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.rightSide h3 {
+  margin-bottom: 20px;
+}
+
+.createForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.createForm label,
+.createForm textarea,
+.createForm input {
+  margin-bottom: 10px;
+}
+
+.ingredientsBtn {
+  border-radius: 5px;
+  color: white;
+  margin-top: 0.5em;
+}
+
+.submitBtn {
+  border-radius: 5px;
+  color: white;
+  margin-top: 0.5em;
+}

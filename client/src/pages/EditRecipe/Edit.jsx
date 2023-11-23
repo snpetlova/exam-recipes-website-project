@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import editLeft from "../assets/editLeft.jpg";
+import editLeft from "../../assets/editLeft.jpg";
 import Button from "react-bootstrap/Button";
+import './Edit.css';
 
 export const Edit = ({ onEdit }) => {
   const { recipeId } = useParams();

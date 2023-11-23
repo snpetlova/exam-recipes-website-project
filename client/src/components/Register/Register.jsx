@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import loginImg from "../assets/loginImg.png";
+import { useNavigate } from "react-router-dom";
+import registerImg from "../../assets/registerImg.png";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import './Register.css';
 
-export const Login = () => {
+export const Register = () => {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [_, setCookies] = useCookies(["access_token"]);
 
   const navigate = useNavigate();
 
@@ -18,28 +17,27 @@ export const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3001/auth/login", {
+      await axios.post("http://localhost:3001/auth/register", {
         username,
+        email,
         password,
       });
-
-      setCookies("access_token", response.data.token);
-      window.localStorage.setItem("userId", response.data.userId);
-      navigate("/");
+      alert("Registration Completed! Now you have to login!");
+      navigate("/login");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div className="login">
-      <div className="leftSide-login">
-        <img src={loginImg}></img>
+    <div className="register">
+      <div className="leftSide-register">
+        <img src={registerImg} alt="1"/>
       </div>
-      <div className="rightSide-login">
+      <div className="rightSide-register">
         <div className="auth-container">
           <form onSubmit={onSubmit}>
-            <h2 className="loginRegLabel">Login</h2>
+            <h2 className="loginRegLabel">Register</h2>
             <div className="form-group">
               <label htmlFor="username" value={username}>
                 Username:
@@ -48,6 +46,16 @@ export const Login = () => {
                 type="text"
                 id="username"
                 onChange={(event) => setUsername(event.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email" value={email}>
+                Email:
+              </label>
+              <input
+                type="text"
+                id="email"
+                onChange={(event) => setEmail(event.target.value)}
               />
             </div>
             <div className="form-group">
@@ -60,16 +68,16 @@ export const Login = () => {
                 onChange={(event) => setPassword(event.target.value)}
               />
             </div>
-            <Button type="sumbit" variant="dark" className="loginBtn">
-              Login
+            <Button type="sumbit" variant="dark" className="registerBtn">
+              Register
             </Button>
-            <p className="login-link">
-              You don't have an account? 
+            <p className="register-link">
+              You have an account?
               <Link
                 style={{ textDecoration: "none", color: "black" }}
-                to="/register"
+                to="/login"
               >
-                <span> Register</span>
+                <span> Log in</span>
               </Link>
             </p>
           </form>

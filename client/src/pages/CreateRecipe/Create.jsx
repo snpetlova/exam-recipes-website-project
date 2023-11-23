@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { getUserId } from "../hooks/getUserId";
+import { getUserId } from "../../hooks/getUserId";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Button from "react-bootstrap/Button";
-import dishesLeft from "../assets/dishesLeft.jpg";
+import dishesLeft from "../../assets/dishesLeft.jpg";
+import './Create.css';
 
 function Create() {
   const userId = getUserId();
