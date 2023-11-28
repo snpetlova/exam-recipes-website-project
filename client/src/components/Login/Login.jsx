@@ -5,6 +5,7 @@ import axios from "axios";
 import loginImg from "../../assets/loginImg.png";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import { useAuth } from "../../context/AuthContext";
 import './Login.css';
 
 export const Login = () => {
@@ -14,6 +15,8 @@ export const Login = () => {
   const [_, setCookies] = useCookies(["access_token"]);
 
   const navigate = useNavigate();
+
+  const { login } = useAuth();  
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +29,7 @@ export const Login = () => {
 
       setCookies("access_token", response.data.token);
       window.localStorage.setItem("userId", response.data.userId);
+      login(response.data.user);
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -34,7 +38,7 @@ export const Login = () => {
 
   return (
     <div className="login">
-      <div className="leftSide-login">
+      <div className="leftSide-login">  
         <img src={loginImg}></img>
       </div>
       <div className="rightSide-login">

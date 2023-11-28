@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import registerImg from "../../assets/registerImg.png";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import './Register.css';
+import "./Register.css";
 
 export const Register = () => {
   const [username, setUsername] = useState("");
@@ -22,7 +22,8 @@ export const Register = () => {
         email,
         password,
       });
-      alert("Registration Completed! Now you have to login!");
+
+      alert("Registration Completed! Welcome to Flavor Fiesta! Now you should login!");
       navigate("/login");
     } catch (error) {
       console.error(error);
@@ -32,7 +33,7 @@ export const Register = () => {
   return (
     <div className="register">
       <div className="leftSide-register">
-        <img src={registerImg} alt="1"/>
+        <img src={registerImg} alt="1" />
       </div>
       <div className="rightSide-register">
         <div className="auth-container">

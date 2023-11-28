@@ -2,14 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import './Navbar.css';
 
 export const Navbar = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);
 
+  const { logout } = useAuth();
+
   const navigate = useNavigate();
 
-  const logout = () => {
+  const handleLogout = () => {
+    logout();
     setCookies("access_token", "");
     window.localStorage.removeItem("userId");
     navigate("/login");
@@ -29,7 +33,7 @@ export const Navbar = () => {
           <Link to="/create-recipe"  className="navbar-refs">Create Recipe</Link>
           <Link to="/saved-recipes"  className="navbar-refs">Saved Recipes</Link>
 
-          <button className="logout" onClick={logout}>Logout</button>
+          <button className="logout" onClick={handleLogout}>Logout</button>
         </>
       )}
     </div>

@@ -8,37 +8,52 @@ const router = express.Router(); //creates an instance of an express router
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
 
-  const user = await UserModel.findOne({ username });
+  try {
+    const user = await UserModel.findOne({ username });
 
-  if (user) {
-    return res.json({ message: "User already exists!" });
+    if (user) {
+      return res.json({ message: "User already exists!" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new UserModel({
+      username,
+      email,
+      password: hashedPassword,
+    });
+    await newUser.save();
+
+    const token = jwt.sign({ id: newUser._id }, "secret");
+    res.json({ token, userId: newUser._id, user: newUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const newUser = new UserModel({ username, email, password: hashedPassword });
-  await newUser.save();
-
-  res.json({ message: "Registration was successful!" });
 });
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body; //TODO Add more requierments
 
-  const user = await UserModel.findOne({ username });
+  try {
+    const user = await UserModel.findOne({ username });
 
-  if (!user) {
-    return res.json({ message: "User does not exist!" });
+    if (!user) {
+      return res.json({ message: "User does not exist!" });
+    }
+
+    const isPassValid = await bcrypt.compare(password, user.password);
+
+    if (!isPassValid) {
+      return res.json({ message: "Username or password is incorrect!" });
+    }
+
+    const token = jwt.sign({ id: user._id }, "secret");
+    res.json({ token, userId: user._id });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
-
-  const isPassValid = await bcrypt.compare(password, user.password);
-
-  if (!isPassValid) {
-    return res.json({ message: "Username or password is incorrect!" });
-  }
-
-  const token = jwt.sign({ id: user._id }, "secret");
-  res.json({ token, userId: user._id });
 });
 
 export { router as userRouter };

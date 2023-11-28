@@ -10,12 +10,13 @@ import { Register } from "./components/Register/Register";
 import { Details } from "./pages/RecipeDetails/Details";
 import { Edit } from "./pages/EditRecipe/Edit";
 import { NotFound } from "./components/404/404";
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
     <div className="App">
       <Router>
+      <AuthProvider>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -28,9 +29,11 @@ function App() {
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />
+        </AuthProvider>
       </Router>
     </div>
   );
 }
 
 export default App;
+
