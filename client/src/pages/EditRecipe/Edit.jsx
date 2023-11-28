@@ -3,11 +3,20 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import editLeft from "../../assets/editLeft.jpg";
 import Button from "react-bootstrap/Button";
+import { useAuth } from "../../context/AuthContext";
 import './Edit.css';
 
 export const Edit = ({ onEdit }) => {
   const { recipeId } = useParams();
   const navigate = useNavigate();
+  const { state } = useAuth();
+
+  useEffect(() => {
+    // Redirect to login if not authenticated
+    if (!state.isAuthenticated) {
+      navigate("/login");
+    }
+  }, [state.isAuthenticated, navigate]);
 
   const [editedRecipe, setEditedRecipe] = useState({
     name: "",

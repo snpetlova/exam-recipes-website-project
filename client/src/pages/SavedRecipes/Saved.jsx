@@ -7,12 +7,24 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import "./Saved.css";
 
 function Saved() {
   const [savedRecipes, setSavedRecipes] = useState([]);
   const [cookies, _] = useCookies(["access_token"]);
   const userId = getUserId();
+
+  const navigate = useNavigate();
+  const { state } = useAuth();
+
+  useEffect(() => {
+    // Redirect to login if not authenticated
+    if (!state.isAuthenticated) {
+      navigate("/login");
+    }
+  }, [state.isAuthenticated, navigate]);
 
   useEffect(() => {
     const fetchSavedRecipes = async () => {

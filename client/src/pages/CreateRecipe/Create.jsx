@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getUserId } from "../../hooks/getUserId";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Button from "react-bootstrap/Button";
 import dishesLeft from "../../assets/dishesLeft.jpg";
-import './Create.css';
+import { useAuth } from "../../context/AuthContext";
+import "./Create.css";
 
 function Create() {
+  const navigate = useNavigate();
+  const { state } = useAuth();
+
+  useEffect(() => {
+    // Redirect to login if not authenticated
+    if (!state.isAuthenticated) {
+      navigate("/login");
+    }
+  }, [state.isAuthenticated, navigate]);
+
   const userId = getUserId();
 
   const [recipe, setRecipe] = useState({
@@ -19,8 +30,6 @@ function Create() {
     userOwner: userId,
   });
   const [cookies, _] = useCookies(["access_token"]);
-
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
