@@ -11,5 +11,5 @@
 
 //Filter -> Last Saved
 
-//User already exists CSS
+//User already exists message text
 

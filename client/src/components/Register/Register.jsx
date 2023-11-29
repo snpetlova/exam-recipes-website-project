@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import Alert from "react-bootstrap/Alert";
 import "./Register.css";
 
 export const Register = () => {
@@ -86,12 +87,18 @@ export const Register = () => {
         <div className="auth-container">
           <form onSubmit={onSubmit}>
             <h2 className="loginRegLabel">Register</h2>
+
             {errors.userExists && (
-              <p className="error-message">{errors.userExists}</p>
+              <Alert key="danger" variant="danger" className="alert-danger">
+                <p className="error-message">{errors.userExists}</p>{" "}
+              </Alert>
             )}
             {errors.registrationError && (
-              <p className="error-message">{errors.registrationError}</p>
+              <Alert key="danger" variant="danger" className="alert-danger">
+                <p className="error-message">{errors.registrationError}</p>{" "}
+              </Alert>
             )}
+
             <div className="form-group">
               <label htmlFor="username" value={username}>
                 Username:

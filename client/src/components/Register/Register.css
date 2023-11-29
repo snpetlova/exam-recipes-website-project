@@ -57,4 +57,9 @@
 
 .error-message {
   color: red;
+  align-items: center;
+}
+
+.alert-danger {
+  height: 3.5em;
 }
