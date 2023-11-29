@@ -8,22 +8,11 @@ const router = express.Router(); //creates an instance of an express router
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
 
-  // //Validate email
-  // const doesEmailMatch = /^\S+@\S+\.\S+$/;
-  // if (!doesEmailMatch.test(email)) {
-  //   return res.json({ message: "Email is not valid!" })
-  // }
-
-  // //Validate password
-  // if (password.length < 8) {
-  //   return res.json({ message: "Password should be at least 8 symbols!" })
-  // }
-
   try {
     const user = await UserModel.findOne({ username });
 
     if (user) {
-      return res.json({ message: "User already exists!" });
+      return res.status(400).json({ message: "User already exists!" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -44,19 +33,21 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body; //TODO Add more requierments
+  const { username, password } = req.body;
 
   try {
     const user = await UserModel.findOne({ username });
 
     if (!user) {
-      return res.json({ message: "User does not exist!" });
+      return res.status(404).json({ message: "User does not exist!" });
     }
 
     const isPassValid = await bcrypt.compare(password, user.password);
 
     if (!isPassValid) {
-      return res.json({ message: "Username or password is incorrect!" });
+      return res
+        .status(401)
+        .json({ message: "Username or password is incorrect!" });
     }
 
     const token = jwt.sign({ id: user._id }, "secret");
@@ -82,20 +73,3 @@ export const verifyToken = (req, res, next) => {
     res.sendStatus(401);
   }
 };
-
-// const verifyToken = (req, res, next) => {
-//   const token = req.header('Authorization');
-
-//   if (!token) {
-//     return res.status(401).json({ message: 'Unauthorized' });
-//   }
-
-//   jwt.verify(token, 'secret', (err, user) => {
-//     if (err) {
-//       return res.status(403).json({ message: 'Forbidden' });
-//     }
-
-//     req.user = user;
-//     next();
-//   });
-// };
