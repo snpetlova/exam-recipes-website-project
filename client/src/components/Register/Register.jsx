@@ -17,7 +17,7 @@ export const Register = () => {
   const navigate = useNavigate();
 
   const validateUsername = (username) => {
-    return username.length > 5;
+    return username.length > 4;
   };
 
   const validateEmail = (email) => {
@@ -26,7 +26,7 @@ export const Register = () => {
   };
 
   const validatePassword = (password) => {
-    return password.length > 8;
+    return password.length > 7;
   };
 
   const onSubmit = async (e) => {
@@ -64,6 +64,16 @@ export const Register = () => {
       setErrors({});
     } catch (error) {
       console.error(error);
+      if (
+        error.response &&
+        error.response.data.message === "User already exists!"
+      ) {
+        setErrors({ userExists: error.response.data.message });
+      } else {
+        setErrors({
+          registrationError: "Error during registration. Please try again.",
+        });
+      }
     }
   };
 
@@ -76,6 +86,12 @@ export const Register = () => {
         <div className="auth-container">
           <form onSubmit={onSubmit}>
             <h2 className="loginRegLabel">Register</h2>
+            {errors.userExists && (
+              <p className="error-message">{errors.userExists}</p>
+            )}
+            {errors.registrationError && (
+              <p className="error-message">{errors.registrationError}</p>
+            )}
             <div className="form-group">
               <label htmlFor="username" value={username}>
                 Username:

@@ -54,3 +54,7 @@
   height: 20px;
   overflow: hidden;
 }
+
+.error-message {
+  color: red;
+}
