@@ -8,6 +8,17 @@ const router = express.Router(); //creates an instance of an express router
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
 
+  // //Validate email
+  // const doesEmailMatch = /^\S+@\S+\.\S+$/;
+  // if (!doesEmailMatch.test(email)) {
+  //   return res.json({ message: "Email is not valid!" })
+  // }
+
+  // //Validate password
+  // if (password.length < 8) {
+  //   return res.json({ message: "Password should be at least 8 symbols!" })
+  // }
+
   try {
     const user = await UserModel.findOne({ username });
 
