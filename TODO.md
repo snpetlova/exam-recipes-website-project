@@ -1,19 +1,13 @@
 
-//SAVED
--Better UI
-
-//DETAILS
--Ingredients on sepatate rows
-
-//CHECK AUTHENTICATION
-
 //FIX FOOTER
 
 //VALIDATIONS
 
-//ROUTE GUARDS
+//ERROR HANDLING
 
 //HOST THE SITE
 
-//ADD CONTEXT API
+//Saved if empty -> message
+
+//Filter -> Last Saved
 
