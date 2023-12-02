@@ -21,7 +21,7 @@ function Saved() {
 
   useEffect(() => {
     // Redirect to login if not authenticated
-    const storedUserId = localStorage.getItem('userId');
+    const storedUserId = localStorage.getItem("userId");
     if (!state.isAuthenticated && !storedUserId) {
       navigate("/login");
     }
@@ -50,7 +50,6 @@ function Saved() {
       });
 
       setSavedRecipes(savedRecipes.filter((recipe) => recipe._id !== recipeId));
-      
     } catch (err) {
       console.error("Error unsaving recipe:", err);
     }
@@ -59,34 +58,38 @@ function Saved() {
   return (
     <div className="box">
       <h1>Saved Recipes</h1>
-      <Row xs={1} md={3} className="g-4">
-        {savedRecipes.map((recipe) => (
-          <Col key={recipe._id}>
-            <Card>
-              <Card.Img variant="top" src={recipe.imageUrl} />
-              <Card.Body>
-                <Card.Title>{recipe.name}</Card.Title>
-                <p>Cooking Time: {recipe.cookingTime} minutes</p>
-                <Button
-                  variant="secondary"
-                  className="unsave-btn"
-                  onClick={() => unsaveRecipe(recipe._id)}
-                >
-                  Unsave
-                </Button>
-                <Button variant="primary" className="detailsBtn">
-                  <Link
-                    to={`/recipes/${recipe._id}`}
-                    style={{ color: "white", textDecoration: "none" }}
+      {savedRecipes.length === 0 ? (
+        <p>No saved recipes found. Save some recipes to view them here.</p>
+      ) : (
+        <Row xs={1} md={3} className="g-4">
+          {savedRecipes.map((recipe) => (
+            <Col key={recipe._id}>
+              <Card>
+                <Card.Img variant="top" src={recipe.imageUrl} />
+                <Card.Body>
+                  <Card.Title>{recipe.name}</Card.Title>
+                  <p>Cooking Time: {recipe.cookingTime} minutes</p>
+                  <Button
+                    variant="secondary"
+                    className="unsave-btn"
+                    onClick={() => unsaveRecipe(recipe._id)}
                   >
-                    Details
-                  </Link>
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+                    Unsave
+                  </Button>
+                  <Button variant="primary" className="detailsBtn">
+                    <Link
+                      to={`/recipes/${recipe._id}`}
+                      style={{ color: "white", textDecoration: "none" }}
+                    >
+                      Details
+                    </Link>
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
     </div>
   );
 }
