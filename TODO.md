@@ -4,6 +4,9 @@
 //VALIDATIONS
 
 //ERROR HANDLING
+-Create Recipes
+-Login
+-Register DONE
 
 //HOST THE SITE
 

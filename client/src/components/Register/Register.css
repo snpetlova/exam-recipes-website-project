@@ -55,11 +55,12 @@
   overflow: hidden;
 }
 
-.error-message {
-  color: red;
+.alert-danger {
+  display: flex;
   align-items: center;
 }
 
-.alert-danger {
-  height: 3.5em;
+.error-message {
+  margin-bottom: 0;
+  color: red;
 }

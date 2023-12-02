@@ -67,12 +67,12 @@ export const Register = () => {
       console.error(error);
       if (
         error.response &&
-        error.response.data.message === "User already exists!"
+        error.response.data.message === "User already exists. Please try again."
       ) {
         setErrors({ userExists: error.response.data.message });
       } else {
         setErrors({
-          registrationError: "Error during registration. Please try again.",
+          registrationError: "This username or email is already taken. Please try again.",
         });
       }
     }
@@ -90,12 +90,12 @@ export const Register = () => {
 
             {errors.userExists && (
               <Alert key="danger" variant="danger" className="alert-danger">
-                <p className="error-message">{errors.userExists}</p>{" "}
+                <p className="error-message">{errors.userExists}</p>
               </Alert>
             )}
             {errors.registrationError && (
               <Alert key="danger" variant="danger" className="alert-danger">
-                <p className="error-message">{errors.registrationError}</p>{" "}
+                <p className="error-message">{errors.registrationError}</p>
               </Alert>
             )}
 
@@ -165,7 +165,7 @@ export const Register = () => {
                 </Form.Control.Feedback>
               </InputGroup>
             </div>
-            <Button type="sumbit" variant="dark" className="registerBtn">
+            <Button type="submit" variant="dark" className="registerBtn">
               Register
             </Button>
             <p className="register-link">
