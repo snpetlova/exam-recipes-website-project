@@ -11,12 +11,15 @@ export const Edit = ({ onEdit }) => {
   const navigate = useNavigate();
   const { state } = useAuth();
 
+  const [recipe, setRecipe] = useState(null);
+
   useEffect(() => {
-    // Redirect to login if not authenticated
-    if (!state.isAuthenticated) {
+     // Redirect to login if not authenticated
+    const storedUserId = localStorage.getItem('userId');
+    if (!state.isAuthenticated && !storedUserId) {
       navigate("/login");
     }
-  }, [state.isAuthenticated, navigate]);
+  }, [state.isAuthenticated]);
 
   const [editedRecipe, setEditedRecipe] = useState({
     name: "",
@@ -40,6 +43,14 @@ export const Edit = ({ onEdit }) => {
 
     fetchRecipeData();
   }, [recipeId]);
+
+  useEffect(() => {
+    // Check if the authenticated user is the owner of the recipe
+    if (state.user && recipe && state.user.userId !== recipe.userOwner) {
+      // Redirect to unauthorized page or handle unauthorized access
+      navigate("/404");
+    }
+  }, [state.user, recipe, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

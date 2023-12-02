@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const SET_USER = 'SET_USER';
 const LOGOUT = 'LOGOUT';
@@ -24,13 +25,41 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  // Load authentication state from localStorage on component mount
+  useEffect(() => {
+    const storedAuthState = localStorage.getItem('authState');
+    if (storedAuthState) {
+      dispatch({ type: SET_USER, payload: JSON.parse(storedAuthState) });
+    }
+  }, []);
+
   const login = (user) => {
     dispatch({ type: SET_USER, payload: user });
+    // Save authentication state to localStorage
+    localStorage.setItem('authState', JSON.stringify({ ...state, user }));
   };
 
   const logout = () => {
     dispatch({ type: LOGOUT });
+    // Remove authentication state from localStorage
+    localStorage.removeItem('authState');
   };
+
+  const navigate = useNavigate();
+
+  // Check if there's a user in the initial state before redirecting
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    const storedRecipeOwnerId = localStorage.getItem('userOwner');
+
+    if (!state.isAuthenticated && !storedUserId) {
+      navigate("/login");
+    }
+
+    if (storedUserId !== storedRecipeOwnerId) {
+      navigate("/404");
+    }
+  }, [state.isAuthenticated]);
 
   return (
     <AuthContext.Provider value={{ state, login, logout }}>

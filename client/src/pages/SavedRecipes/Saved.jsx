@@ -21,10 +21,11 @@ function Saved() {
 
   useEffect(() => {
     // Redirect to login if not authenticated
-    if (!state.isAuthenticated) {
+    const storedUserId = localStorage.getItem('userId');
+    if (!state.isAuthenticated && !storedUserId) {
       navigate("/login");
     }
-  }, [state.isAuthenticated, navigate]);
+  }, [state.isAuthenticated]);
 
   useEffect(() => {
     const fetchSavedRecipes = async () => {
