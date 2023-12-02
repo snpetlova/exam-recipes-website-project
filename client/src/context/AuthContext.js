@@ -50,14 +50,9 @@ export const AuthProvider = ({ children }) => {
   // Check if there's a user in the initial state before redirecting
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
-    const storedRecipeOwnerId = localStorage.getItem('userOwner');
 
     if (!state.isAuthenticated && !storedUserId) {
       navigate("/login");
-    }
-
-    if (storedUserId !== storedRecipeOwnerId) {
-      navigate("/404");
     }
   }, [state.isAuthenticated]);
 
