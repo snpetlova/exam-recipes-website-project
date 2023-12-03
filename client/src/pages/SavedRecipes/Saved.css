@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 1em;
+  min-height: 74.5vh;
 }
 
 .detailsBtn.btn.btn-primary {
