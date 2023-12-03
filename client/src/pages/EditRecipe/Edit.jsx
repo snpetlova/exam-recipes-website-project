@@ -4,22 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import editLeft from "../../assets/editLeft.jpg";
 import Button from "react-bootstrap/Button";
 import { useAuth } from "../../context/AuthContext";
-import './Edit.css';
+import "./Edit.css";
 
 export const Edit = ({ onEdit }) => {
   const { recipeId } = useParams();
   const navigate = useNavigate();
   const { state } = useAuth();
-
-  const [recipe, setRecipe] = useState(null);
-
-  useEffect(() => {
-     // Redirect to login if not authenticated
-    const storedUserId = localStorage.getItem('userId');
-    if (!state.isAuthenticated && !storedUserId) {
-      navigate("/login");
-    }
-  }, [state.isAuthenticated]);
 
   const [editedRecipe, setEditedRecipe] = useState({
     name: "",
@@ -30,11 +20,28 @@ export const Edit = ({ onEdit }) => {
   });
 
   useEffect(() => {
+    // Redirect to login if not authenticated
+    const storedUserId = localStorage.getItem("userId");
+    if (!state.isAuthenticated && !storedUserId) {
+      navigate("/login");
+    }
+  }, [state.isAuthenticated]);
+
+  useEffect(() => {
     const fetchRecipeData = async () => {
       try {
         const response = await axios.get(
           `http://localhost:3001/recipes/${recipeId}`
         );
+
+        // Check if the authenticated user is the owner of the recipe
+        const storedUserId = localStorage.getItem("userId");
+        const storedUserOwner = response.data.userOwner;
+        if (storedUserId !== storedUserOwner) {
+          // Redirect to unauthorized page or handle unauthorized access
+          navigate("/404");
+        }
+
         setEditedRecipe(response.data);
       } catch (error) {
         console.error("Error fetching recipe data:", error);
@@ -43,14 +50,6 @@ export const Edit = ({ onEdit }) => {
 
     fetchRecipeData();
   }, [recipeId]);
-
-  useEffect(() => {
-    // Check if the authenticated user is the owner of the recipe
-    if (state.user && recipe && state.user.userId !== recipe.userOwner) {
-      // Redirect to unauthorized page or handle unauthorized access
-      navigate("/404");
-    }
-  }, [state.user, recipe, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
