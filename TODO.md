@@ -1,4 +1,0 @@
-
-//FIX FOOTER
-
-//HOST THE SITE
