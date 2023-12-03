@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# Flavor Fiesta - Website for recipes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to Flavor Fiesta. This is a recipe website where users can explore, save, and edit their favorite recipes.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+• User Registration and Authentication:
+   - Users can create an account by providing username, email, and password.
+   - Passwords are securely hashed using bcrypt before being stored in the database.
+   - Users can log in with their credentials to access personalized features.
 
-### `npm start`
+• Browse a collection of delicious recipes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+• Save your favorite recipes to your personal collection.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+• Create and share your own recipes with the community.
 
-### `npm test`
+• Edit and customize your existing recipes to suit your taste.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+• Explore detailed cooking instructions and ingredient lists.
 
-### `npm run build`
+• Easily manage your saved recipes and created content from your user profile:
+   - Users can create, edit and delete recipes from their profile.
+   - Users can save and unsave recipes.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To start Flavor Fiesta on your machine, follow these steps:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository.
+2. Install dependencies using `npm i`.
+3. Setup backend server:
+  - Open a terminal and navigate to the `server` directory;
+  - Open `src` folder;
+  - Start server using `npm start`. The server will run at [http://localhost:3001](http://localhost:3001).
+4. Setup the frontend server:
+  - Open another terminal and navigate to the `client` directory;
+  - Start server using `npm start`. The server will run at [http://localhost:3000](http://localhost:3000).
+5. Open your browser and visit [http://localhost:3000](http://localhost:3000) to access Flavor Fiesta.
 
-### `npm run eject`
+## Technologies used
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Flavor Fiesta is built using a variety of technologies to provide enjoyable experience for users. Here are the key technologies used in this project:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Frontend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **React:** A JavaScript library for building user interfaces.
+- **React Router:** A library for handling navigation in a React application.
+- **Bootstrap:** A popular CSS framework for building responsive and stylish user interfaces.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Backend
 
-## Learn More
+- **Node.js:** A JavaScript runtime for building scalable server-side applications.
+- **Express:** A web application framework for Node.js, used for building the server.
+- **MongoDB:** A NoSQL database for storing and retrieving recipe data.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Additional Tools and Libraries
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Axios:** A promise-based HTTP client for making requests to the server.
+- **Bcrypt:** A library for hashing and salting passwords for secure user authentication.
+- **JWT (JSON Web Tokens):** A standard for creating secure authentication tokens.
+- **Mongoose:** An ODM (Object Data Modeling) library for MongoDB and Node.js.
 
-### Code Splitting
+### Development and Build Tools
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **npm:** The package manager for JavaScript. Used for installing and managing project dependencies.
+- **Create React App:** A tool for setting up a new React project with a predefined directory structure and build configuration.
+- **nodemon:** A utility for automatically restarting the server during development.
 
-### Analyzing the Bundle Size
+Feel free to explore and contribute to the project, and don't hesitate to reach out if you have any questions or suggestions.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Contact
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you have any questions or need further assistance, please contact me at [snpetlova@gmail.com](mailto:snpetlova@gmail.com). 
+Happy Cooking! 🍽🍔
