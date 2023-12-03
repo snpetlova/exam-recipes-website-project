@@ -72,4 +72,5 @@ Feel free to explore and contribute to the project, and don't hesitate to reach 
 ## Contact
 
 If you have any questions or need further assistance, please contact me at [snpetlova@gmail.com](mailto:snpetlova@gmail.com). 
+
 Happy Cooking! 🍽🍔
