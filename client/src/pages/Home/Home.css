@@ -1,3 +1,8 @@
+html {
+  overflow-x: hidden;
+  margin-right: 0.04em;
+}
+
 .card-img.landing {
   margin-top: 1em;
 }
