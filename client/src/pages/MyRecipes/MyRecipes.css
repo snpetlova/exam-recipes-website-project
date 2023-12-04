@@ -5,7 +5,7 @@
     margin-top: 1em;
     min-height: 74.5vh;
   }
-  
+
   .detailsBtn.btn.btn-primary {
     margin-left: 0.3em;
     --bs-btn-bg: rgb(198, 72, 16);
@@ -19,4 +19,3 @@
   .col {
     min-width: 20em;
   }
-  

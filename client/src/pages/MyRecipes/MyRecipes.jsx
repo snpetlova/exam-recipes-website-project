@@ -34,10 +34,6 @@ const MyRecipes = () => {
     return <div>Loading...</div>;
   }
 
-  if (userRecipes.length === 0) {
-    return <div>No recipes found.</div>;
-  }
-
   return (
     <div className="box">
       <h1>Your Recipes</h1>
@@ -75,6 +71,19 @@ const MyRecipes = () => {
           ))}
         </Row>
       )}
+
+      <Button
+        variant="dark"
+        className="createBtn"
+        style={{ "margin-top": "2em"}}
+      >
+        <Link
+          to={`/create-recipe`}
+          style={{ color: "white", textDecoration: "none" }}
+        >
+          Create Recipe
+        </Link>
+      </Button>
     </div>
   );
 };
