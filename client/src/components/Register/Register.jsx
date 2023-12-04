@@ -171,7 +171,7 @@ export const Register = () => {
             <p className="register-link">
               You have an account?
               <Link
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none", color: "rgb(198, 72, 16)" }}
                 to="/login"
               >
                 <span> Log in</span>

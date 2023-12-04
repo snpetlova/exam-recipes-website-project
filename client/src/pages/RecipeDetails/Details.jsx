@@ -63,7 +63,9 @@ export const Details = (onDelete) => {
   }, [recipeId]);
 
   useEffect(() => {
-    setIsRecipeBeingSaved(savedRecipes.includes(recipeId));
+    if (savedRecipes) {
+      setIsRecipeBeingSaved(savedRecipes.includes(recipeId));
+    }
   }, [savedRecipes, recipeId]);
 
   if (loading) {
@@ -137,6 +139,8 @@ export const Details = (onDelete) => {
     navigate(-1);
   };
 
+  const isLoggedIn = window.localStorage.getItem("userId") !== null; 
+
   return (
     <div className="recipe-details-container">
       <Card style={{ width: "1000px" }} border="0">
@@ -157,7 +161,7 @@ export const Details = (onDelete) => {
           <div className="recipe-details-info">
             <Card.Body>
               <div className="heart-and-title">
-                <Button
+              {isLoggedIn && <Button
                   variant="link"
                   className="saveBtn"
                   onClick={handleSaveClick}
@@ -167,22 +171,22 @@ export const Details = (onDelete) => {
                   ) : (
                     <FaRegHeart />
                   )}
-                </Button>
+                </Button> }
                 <Card.Title style={{ fontSize: "30px", marginBottom: "30px" }}>
                   {recipe.name}
                 </Card.Title>
               </div>
               <Card.Text>
-                <span style={{ fontWeight: "bold" }}>Ingredients:</span>{" "}
+                <span style={{ fontWeight: "bold" }}>Ingredients: </span>
                 {recipe.ingredients.join(", ")}
               </Card.Text>
               <Card.Text>
-                <span style={{ fontWeight: "bold" }}>Instructions:</span>{" "}
+                <span style={{ fontWeight: "bold" }}>Instructions: </span>
                 {recipe.instructions}
               </Card.Text>
 
               <Card.Text>
-                <span style={{ fontWeight: "bold" }}>Cooking time:</span>{" "}
+                <span style={{ fontWeight: "bold" }}>Cooking time: </span>
                 {recipe.cookingTime} minutes
               </Card.Text>
 

@@ -109,7 +109,7 @@ export const Login = () => {
             <p className="login-link">
               You don't have an account? 
               <Link
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none", color: "rgb(198, 72, 16)" }}
                 to="/register"
               >
                 <span> Register</span>

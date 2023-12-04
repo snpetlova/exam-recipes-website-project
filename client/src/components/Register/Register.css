@@ -8,11 +8,12 @@
 .leftSide-register {
   flex: 1;
   padding: 20px;
+  margin-right: 5em;
 }
 
 .leftSide-register img {
   width: 100%;
-  height: auto;
+  height: 28em;
   border-radius: 10px;
 }
 
