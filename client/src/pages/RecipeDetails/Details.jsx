@@ -71,7 +71,7 @@ export const Details = (onDelete) => {
   }
 
   if (!recipe) {
-    return <div>No recipe found</div>;
+    return <div>No recipes found.</div>;
   }
 
   const saveRecipe = async (recipeId) => {

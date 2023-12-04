@@ -14,8 +14,8 @@ function Create() {
   const { state } = useAuth();
 
   useEffect(() => {
-     // Redirect to login if not authenticated
-    const storedUserId = localStorage.getItem('userId');
+    // Redirect to login if not authenticated
+    const storedUserId = localStorage.getItem("userId");
     if (!state.isAuthenticated && !storedUserId) {
       navigate("/login");
     }
@@ -44,6 +44,10 @@ function Create() {
 
   const validateInstructions = (instructions) => {
     return instructions.length >= 20;
+  };
+
+  const validateCookingTime = (cookingTime) => {
+    return cookingTime.length > 0;
   };
 
   const validateImageUrl = (url) => {
@@ -83,6 +87,10 @@ function Create() {
       newErrors.instructions = "Instructions should be at least 20 symbols!";
     }
 
+    if (!validateCookingTime(recipe.cookingTime)) {
+      newErrors.cookingTime = "Cooking time is required!";
+    }
+
     if (!validateImageUrl(recipe.imageUrl)) {
       newErrors.imageUrl = "Invalid Image URL!";
     }
@@ -111,25 +119,30 @@ function Create() {
       <div className="rightSide">
         <h3>Create Recipe</h3>
         {errors.recipeName && (
-        <Alert key="danger" variant="danger" className="alert-danger">
-          <p className="error-message">{errors.recipeName}</p>
-        </Alert>
-      )}
-       {errors.ingredients && (
-        <Alert key="danger" variant="danger" className="alert-danger">
-          <p className="error-message">{errors.ingredients}</p>
-        </Alert>
-      )}
-       {errors.instructions && (
-        <Alert key="danger" variant="danger" className="alert-danger">
-          <p className="error-message">{errors.instructions}</p>
-        </Alert>
-      )}
-       {errors.imageUrl && (
-        <Alert key="danger" variant="danger" className="alert-danger">
-          <p className="error-message">{errors.imageUrl}</p>
-        </Alert>
-      )}
+          <Alert key="danger" variant="danger" className="alert-danger">
+            <p className="error-message">{errors.recipeName}</p>
+          </Alert>
+        )}
+        {errors.ingredients && (
+          <Alert key="danger" variant="danger" className="alert-danger">
+            <p className="error-message">{errors.ingredients}</p>
+          </Alert>
+        )}
+        {errors.instructions && (
+          <Alert key="danger" variant="danger" className="alert-danger">
+            <p className="error-message">{errors.instructions}</p>
+          </Alert>
+        )}
+        {errors.cookingTime && (
+          <Alert key="danger" variant="danger" className="alert-danger">
+            <p className="error-message">{errors.cookingTime}</p>
+          </Alert>
+        )}
+        {errors.imageUrl && (
+          <Alert key="danger" variant="danger" className="alert-danger">
+            <p className="error-message">{errors.imageUrl}</p>
+          </Alert>
+        )}
         <form className="createForm" onSubmit={onSubmit}>
           <label htmlFor="name">Name</label>
           <input type="text" id="name" name="name" onChange={handleChange} />

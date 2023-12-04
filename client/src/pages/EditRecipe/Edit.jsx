@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import editLeft from "../../assets/editLeft.jpg";
 import Button from "react-bootstrap/Button";
 import { useAuth } from "../../context/AuthContext";
+import { useCookies } from "react-cookie";
+import Alert from "react-bootstrap/Alert";
 import "./Edit.css";
 
 export const Edit = ({ onEdit }) => {
@@ -18,6 +20,29 @@ export const Edit = ({ onEdit }) => {
     imageUrl: "",
     cookingTime: 0,
   });
+  const [errors, setErrors] = useState({});
+  const [cookies, _] = useCookies(["access_token"]);
+
+  const validateRecipeName = (name) => {
+    return name.length >= 5;
+  };
+
+  const validateIngredients = (ingredients) => {
+    return ingredients.length > 0;
+  };
+
+  const validateInstructions = (instructions) => {
+    return instructions.length >= 20;
+  };
+
+  const validateCookingTime = (cookingTime) => {
+    return cookingTime.length > 0;
+  };
+
+  const validateImageUrl = (url) => {
+    const isValidUrl = /^http(s)?:\/\/\S+\.\S+$/i.test(url);
+    return isValidUrl;
+  };
 
   useEffect(() => {
     // Redirect to login if not authenticated
@@ -61,6 +86,32 @@ export const Edit = ({ onEdit }) => {
 
   const handleEdit = async (e) => {
     e.preventDefault();
+    const newErrors = {};
+
+    if (!validateRecipeName(editedRecipe.name)) {
+      newErrors.recipeName = "Recipe name should be at least 5 symbols!";
+    }
+
+    if (!validateIngredients(editedRecipe.ingredients)) {
+      newErrors.ingredients = "At least one ingredient is required!";
+    }
+
+    if (!validateInstructions(editedRecipe.instructions)) {
+      newErrors.instructions = "Instructions should be at least 20 symbols!";
+    }
+
+    if (!validateCookingTime(editedRecipe.cookingTime)) {
+      newErrors.cookingTime = "Cooking time is required!";
+    }
+
+    if (!validateImageUrl(editedRecipe.imageUrl)) {
+      newErrors.imageUrl = "Invalid Image URL!";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
     try {
       const userId = localStorage.getItem("userId");
@@ -115,6 +166,31 @@ export const Edit = ({ onEdit }) => {
       </div>
       <div className="rightSide">
         <h3>Edit Recipe</h3>
+        {errors.recipeName && (
+          <Alert key="danger" variant="danger" className="alert-danger">
+            <p className="error-message">{errors.recipeName}</p>
+          </Alert>
+        )}
+        {errors.ingredients && (
+          <Alert key="danger" variant="danger" className="alert-danger">
+            <p className="error-message">{errors.ingredients}</p>
+          </Alert>
+        )}
+        {errors.instructions && (
+          <Alert key="danger" variant="danger" className="alert-danger">
+            <p className="error-message">{errors.instructions}</p>
+          </Alert>
+        )}
+        {errors.imageUrl && (
+          <Alert key="danger" variant="danger" className="alert-danger">
+            <p className="error-message">{errors.imageUrl}</p>
+          </Alert>
+        )}
+         {errors.cookingTime && (
+          <Alert key="danger" variant="danger" className="alert-danger">
+            <p className="error-message">{errors.cookingTime}</p>
+          </Alert>
+        )}
         <form className="editForm" onSubmit={handleEdit}>
           <label htmlFor="name">Name:</label>
           <input
@@ -159,19 +235,19 @@ export const Edit = ({ onEdit }) => {
             onChange={handleChange}
           />
 
-          <label htmlFor="cookingTime">Cooking time:</label>
-          <input
-            id="cookingTime"
-            name="cookingTime"
-            value={editedRecipe.cookingTime}
-            onChange={handleChange}
-          />
-
           <label htmlFor="imageUrl">Image URL:</label>
           <input
             id="imageUrl"
             name="imageUrl"
             value={editedRecipe.imageUrl}
+            onChange={handleChange}
+          />
+
+          <label htmlFor="cookingTime">Cooking time:</label>
+          <input
+            id="cookingTime"
+            name="cookingTime"
+            value={editedRecipe.cookingTime}
             onChange={handleChange}
           />
           <Button type="sumbit" variant="dark" className="submitBtn">
