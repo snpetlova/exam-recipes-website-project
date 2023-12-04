@@ -18,9 +18,11 @@
   flex-grow: 1;
 }
 
-.saveBtn.btn.btn-secondary {
-  margin-right: 0.3em;
-  margin-top: 1em;
+.saveBtn.btn.btn-link {
+ margin-top: 0;
+ margin-bottom: 1.3em;
+  font-size: 25px;
+  color: rgb(198, 72, 16);
 }
 
 .editBtn.btn.btn-primary {
@@ -37,4 +39,9 @@
   top: 100px; 
   left: 20px; 
   z-index: 1000;
+}
+
+.heart-and-title {
+  display: flex;
+  align-items: center; 
 }

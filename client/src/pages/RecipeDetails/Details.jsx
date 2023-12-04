@@ -5,6 +5,7 @@ import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import "./Details.css";
 
 export const Details = (onDelete) => {
@@ -14,6 +15,7 @@ export const Details = (onDelete) => {
   const [savedRecipes, setSavedRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
+  const [isRecipeBeingSaved, setIsRecipeBeingSaved] = useState(false);
   const [cookies, _] = useCookies(["access_token"]);
 
   const userId = localStorage.getItem("userId");
@@ -60,6 +62,10 @@ export const Details = (onDelete) => {
     fetchRecipeDetails();
   }, [recipeId]);
 
+  useEffect(() => {
+    setIsRecipeBeingSaved(savedRecipes.includes(recipeId));
+  }, [savedRecipes, recipeId]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -97,8 +103,13 @@ export const Details = (onDelete) => {
     }
   };
 
-  const isRecipeSaved = (id) =>
-    Array.isArray(savedRecipes) && savedRecipes.includes(id);
+  const handleSaveClick = () => {
+    if (isRecipeBeingSaved) {
+      unsaveRecipe(recipeId);
+    } else {
+      saveRecipe(recipeId);
+    }
+  };
 
   const isOwner = currentUser._id === recipe.userOwner;
 
@@ -145,9 +156,22 @@ export const Details = (onDelete) => {
           </div>
           <div className="recipe-details-info">
             <Card.Body>
-              <Card.Title style={{ fontSize: "30px", marginBottom: "30px" }}>
-                {recipe.name}
-              </Card.Title>
+              <div className="heart-and-title">
+                <Button
+                  variant="link"
+                  className="saveBtn"
+                  onClick={handleSaveClick}
+                >
+                  {isRecipeBeingSaved ? (
+                    <FaHeart color="red" />
+                  ) : (
+                    <FaRegHeart />
+                  )}
+                </Button>
+                <Card.Title style={{ fontSize: "30px", marginBottom: "30px" }}>
+                  {recipe.name}
+                </Card.Title>
+              </div>
               <Card.Text>
                 <span style={{ fontWeight: "bold" }}>Ingredients:</span>{" "}
                 {recipe.ingredients.join(", ")}
@@ -156,23 +180,12 @@ export const Details = (onDelete) => {
                 <span style={{ fontWeight: "bold" }}>Instructions:</span>{" "}
                 {recipe.instructions}
               </Card.Text>
+
               <Card.Text>
                 <span style={{ fontWeight: "bold" }}>Cooking time:</span>{" "}
                 {recipe.cookingTime} minutes
               </Card.Text>
-              <Button
-                className="saveBtn"
-                variant="secondary"
-                onClick={() => {
-                  if (isRecipeSaved(recipe._id)) {
-                    unsaveRecipe(recipe._id);
-                  } else {
-                    saveRecipe(recipe._id);
-                  }
-                }}
-              >
-                {isRecipeSaved(recipe._id) ? "Unsave" : "Save"}
-              </Button>
+
               {isOwner && (
                 <Button variant="primary" className="editBtn">
                   <Link
