@@ -44,3 +44,7 @@
   top: 20px;
   right: 20px;
 }
+
+.active {
+  color: rgb(185, 185, 185);
+}

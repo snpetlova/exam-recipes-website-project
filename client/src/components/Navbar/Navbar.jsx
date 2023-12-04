@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -21,17 +22,17 @@ export const Navbar = () => {
 
   return (
     <div className="navbar1">
-      <Link to="/" className="navbar-refs">Home</Link>
+      <NavLink to="/" className="navbar-refs" activeClassName="active">Home</NavLink>
 
       {!cookies.access_token ? (
         <>
-          <Link to="/login"  className="navbar-refs">Login</Link>
-          <Link to="/register"  className="navbar-refs">Register</Link>
+          <NavLink to="/login"  className="navbar-refs" activeClassName="active">Login</NavLink>
+          <NavLink to="/register"  className="navbar-refs" activeClassName="active">Register</NavLink>
         </>
       ) : (
         <>
-          <Link to="/create-recipe"  className="navbar-refs">Create Recipe</Link>
-          <Link to="/saved-recipes"  className="navbar-refs">Saved Recipes</Link>
+          <NavLink to="/create-recipe"  className="navbar-refs" activeClassName="active">Create Recipe</NavLink>
+          <NavLink to="/saved-recipes"  className="navbar-refs" activeClassName="active">Saved Recipes</NavLink>
 
           <button className="logout" onClick={handleLogout}>Logout</button>
         </>
