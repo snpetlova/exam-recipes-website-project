@@ -27,8 +27,12 @@ export const Edit = ({ onEdit }) => {
     return name.length >= 5;
   };
 
+  const isObjectEmpty = (obj) => {
+    return Object.values(obj).every(value => !value);
+  };
+  
   const validateIngredients = (ingredients) => {
-    return ingredients.length > 0;
+    return ingredients.length > 0 && ingredients.every(ingredient => !isObjectEmpty(ingredient));
   };
 
   const validateInstructions = (instructions) => {
@@ -36,7 +40,7 @@ export const Edit = ({ onEdit }) => {
   };
 
   const validateCookingTime = (cookingTime) => {
-    return cookingTime.length > 0;
+    return cookingTime >= 0;
   };
 
   const validateImageUrl = (url) => {
@@ -142,6 +146,10 @@ export const Edit = ({ onEdit }) => {
       updatedIngredients[idx] = value;
       return { ...prevRecipe, ingredients: updatedIngredients };
     });
+
+    setErrors((prevErrors) => {
+      return { ...prevErrors, ingredients: undefined };
+    });
   };
 
   const handleAddIngredient = () => {
@@ -149,6 +157,10 @@ export const Edit = ({ onEdit }) => {
       ...prevRecipe,
       ingredients: [...prevRecipe.ingredients, ""],
     }));
+  
+    setErrors((prevErrors) => {
+      return { ...prevErrors, ingredients: undefined };
+    });
   };
 
   const handleRemoveIngredient = (idx) => {
@@ -156,6 +168,10 @@ export const Edit = ({ onEdit }) => {
       const updatedIngredients = [...prevRecipe.ingredients];
       updatedIngredients.splice(idx, 1);
       return { ...prevRecipe, ingredients: updatedIngredients };
+    });
+  
+    setErrors((prevErrors) => {
+      return { ...prevErrors, ingredients: undefined };
     });
   };
 
@@ -186,7 +202,7 @@ export const Edit = ({ onEdit }) => {
             <p className="error-message">{errors.imageUrl}</p>
           </Alert>
         )}
-         {errors.cookingTime && (
+        {errors.cookingTime && (
           <Alert key="danger" variant="danger" className="alert-danger">
             <p className="error-message">{errors.cookingTime}</p>
           </Alert>

@@ -38,8 +38,15 @@ function Create() {
     return name.length >= 5;
   };
 
+  const isObjectEmpty = (obj) => {
+    return Object.values(obj).every((value) => !value);
+  };
+
   const validateIngredients = (ingredients) => {
-    return ingredients.length > 0;
+    return (
+      ingredients.length > 0 &&
+      ingredients.every((ingredient) => !isObjectEmpty(ingredient))
+    );
   };
 
   const validateInstructions = (instructions) => {
@@ -47,7 +54,7 @@ function Create() {
   };
 
   const validateCookingTime = (cookingTime) => {
-    return cookingTime.length > 0;
+    return cookingTime >= 0;
   };
 
   const validateImageUrl = (url) => {
@@ -65,6 +72,10 @@ function Create() {
     const ingredients = recipe.ingredients;
     ingredients[idx] = value;
     setRecipe({ ...recipe, ingredients });
+
+    setErrors((prevErrors) => {
+      return { ...prevErrors, ingredients: undefined };
+    });
   };
 
   const addIngredient = () => {
