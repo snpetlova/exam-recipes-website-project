@@ -32,6 +32,7 @@ export const Navbar = () => {
       ) : (
         <>
           <NavLink to="/create-recipe"  className="navbar-refs" activeClassName="active">Create Recipe</NavLink>
+          <NavLink to="/my-recipes"  className="navbar-refs" activeClassName="active">My Recipes</NavLink>
           <NavLink to="/saved-recipes"  className="navbar-refs" activeClassName="active">Saved Recipes</NavLink>
 
           <button className="logout" onClick={handleLogout}>Logout</button>

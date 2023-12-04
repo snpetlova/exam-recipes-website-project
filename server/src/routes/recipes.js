@@ -101,6 +101,21 @@ router.get("/:recipeId", async (req, res) => {
   }
 });
 
+// Get all recipes created by a specific user
+router.get('/recipes/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Use the find method to get all recipes with the specified userOwner
+    const recipes = await RecipesModel.find({ userOwner: userId });
+
+    res.json(recipes);
+  } catch (error) {
+    console.error('Error fetching user recipes:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 //Delete recipe
 router.delete("/:recipeId", async (req, res) => {
   try {
