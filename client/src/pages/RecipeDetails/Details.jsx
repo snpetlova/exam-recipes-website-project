@@ -4,33 +4,59 @@ import { useParams } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import "./Details.css";
 
 export const Details = (onDelete) => {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const [recipes, setRecipes] = useState([]);
+  const [savedRecipes, setSavedRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
+  const [cookies, _] = useCookies(["access_token"]);
 
   const userId = localStorage.getItem("userId");
   const currentUser = { _id: userId };
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchRecipeDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3001/recipes/${recipeId}`
-        );
-        setRecipe(response.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchRecipes = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/recipes");
+      setRecipes(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const fetchSavedRecipes = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/recipes/savedRecipes/ids/${userId}`
+      );
+      setSavedRecipes(response.data.savedRecipes);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchRecipeDetails = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/recipes/${recipeId}`
+      );
+      setRecipe(response.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchRecipes();
+    fetchSavedRecipes();
     fetchRecipeDetails();
   }, [recipeId]);
 
@@ -41,6 +67,38 @@ export const Details = (onDelete) => {
   if (!recipe) {
     return <div>No recipe found</div>;
   }
+
+  const saveRecipe = async (recipeId) => {
+    try {
+      const response = await axios.put(
+        "http://localhost:3001/recipes",
+        {
+          recipeId,
+          userId,
+        },
+        { headers: { authorization: cookies.access_token } }
+      );
+
+      setSavedRecipes(response.data.savedRecipes);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const unsaveRecipe = async (recipeId) => {
+    try {
+      const response = await axios.delete("http://localhost:3001/recipes", {
+        data: { recipeId, userId },
+        headers: { authorization: cookies.access_token },
+      });
+      setSavedRecipes(response.data.savedRecipes);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const isRecipeSaved = (id) =>
+    Array.isArray(savedRecipes) && savedRecipes.includes(id);
 
   const isOwner = currentUser._id === recipe.userOwner;
 
@@ -102,6 +160,19 @@ export const Details = (onDelete) => {
                 <span style={{ fontWeight: "bold" }}>Cooking time:</span>{" "}
                 {recipe.cookingTime} minutes
               </Card.Text>
+              <Button
+                className="saveBtn"
+                variant="secondary"
+                onClick={() => {
+                  if (isRecipeSaved(recipe._id)) {
+                    unsaveRecipe(recipe._id);
+                  } else {
+                    saveRecipe(recipe._id);
+                  }
+                }}
+              >
+                {isRecipeSaved(recipe._id) ? "Unsave" : "Save"}
+              </Button>
               {isOwner && (
                 <Button variant="primary" className="editBtn">
                   <Link

@@ -18,6 +18,11 @@
   flex-grow: 1;
 }
 
+.saveBtn.btn.btn-secondary {
+  margin-right: 0.3em;
+  margin-top: 1em;
+}
+
 .editBtn.btn.btn-primary {
   margin-right: 0.3em;
   margin-top: 1em;
