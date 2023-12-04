@@ -75,7 +75,7 @@ export const Home = () => {
   const isRecipeSaved = (id) =>
     Array.isArray(savedRecipes) && savedRecipes.includes(id);
 
-  const isLoggedIn = window.localStorage.getItem("userId") !== null; 
+  const isLoggedIn = window.localStorage.getItem("userId") !== null;
 
   return (
     <div className="welcome">
@@ -94,20 +94,31 @@ export const Home = () => {
               <Card>
                 <Card.Img variant="top" src={recipe.imageUrl} />
                 <Card.Body>
-                  <Card.Title>{recipe.name}</Card.Title>
-                  <p>Cooking Time: {recipe.cookingTime} minutes</p>
-                  {isLoggedIn && ( <Button
-                    variant="secondary"
-                    onClick={() => {
-                      if (isRecipeSaved(recipe._id)) {
-                        unsaveRecipe(recipe._id);
-                      } else {
-                        saveRecipe(recipe._id);
-                      }
+                  <Card.Title
+                    style={{
+                      height: "30px",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
                     }}
                   >
-                    {isRecipeSaved(recipe._id) ? "Unsave" : "Save"}
-                  </Button> )}
+                    {recipe.name}
+                  </Card.Title>
+                  <p>Cooking Time: {recipe.cookingTime} minutes</p>
+                  {isLoggedIn && (
+                    <Button
+                      variant="secondary"
+                      onClick={() => {
+                        if (isRecipeSaved(recipe._id)) {
+                          unsaveRecipe(recipe._id);
+                        } else {
+                          saveRecipe(recipe._id);
+                        }
+                      }}
+                    >
+                      {isRecipeSaved(recipe._id) ? "Unsave" : "Save"}
+                    </Button>
+                  )}
 
                   <Button variant="primary" className="detailsBtn">
                     <Link

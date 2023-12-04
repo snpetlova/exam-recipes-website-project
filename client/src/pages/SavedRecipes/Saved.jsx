@@ -67,7 +67,16 @@ function Saved() {
               <Card>
                 <Card.Img variant="top" src={recipe.imageUrl} />
                 <Card.Body>
-                  <Card.Title>{recipe.name}</Card.Title>
+                  <Card.Title
+                    style={{
+                      height: "30px",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {recipe.name}
+                  </Card.Title>
                   <p>Cooking Time: {recipe.cookingTime} minutes</p>
                   <Button
                     variant="secondary"
