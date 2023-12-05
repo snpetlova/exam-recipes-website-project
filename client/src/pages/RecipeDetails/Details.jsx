@@ -139,10 +139,13 @@ export const Details = (onDelete) => {
     navigate(-1);
   };
 
-  const isLoggedIn = window.localStorage.getItem("userId") !== null; 
+  const isLoggedIn = window.localStorage.getItem("userId") !== null;
 
   return (
     <div className="recipe-details-container">
+      <Button variant="secondary" className="goBackBtn" onClick={handleGoBack}>
+        ← Go Back
+      </Button>
       <Card style={{ width: "1000px" }} border="0">
         <div className="recipe-details-content">
           <div className="recipe-details-image">
@@ -161,17 +164,19 @@ export const Details = (onDelete) => {
           <div className="recipe-details-info">
             <Card.Body>
               <div className="heart-and-title">
-              {isLoggedIn && <Button
-                  variant="link"
-                  className="saveBtn"
-                  onClick={handleSaveClick}
-                >
-                  {isRecipeBeingSaved ? (
-                    <FaHeart color="red" />
-                  ) : (
-                    <FaRegHeart />
-                  )}
-                </Button> }
+                {isLoggedIn && (
+                  <Button
+                    variant="link"
+                    className="saveBtn"
+                    onClick={handleSaveClick}
+                  >
+                    {isRecipeBeingSaved ? (
+                      <FaHeart color="red" />
+                    ) : (
+                      <FaRegHeart />
+                    )}
+                  </Button>
+                )}
                 <Card.Title style={{ fontSize: "30px", marginBottom: "30px" }}>
                   {recipe.name}
                 </Card.Title>
@@ -209,13 +214,6 @@ export const Details = (onDelete) => {
                   Delete
                 </Button>
               )}
-              <Button
-                variant="secondary"
-                className="goBackBtn"
-                onClick={handleGoBack}
-              >
-                ← Go Back
-              </Button>
             </Card.Body>
           </div>
         </div>
