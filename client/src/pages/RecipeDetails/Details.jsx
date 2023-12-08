@@ -139,7 +139,7 @@ export const Details = (onDelete) => {
     navigate(-1);
   };
 
-  const isLoggedIn = window.localStorage.getItem("userId") !== null;
+  const isLoggedIn = userId !== null;
 
   return (
     <div className="recipe-details-container">
