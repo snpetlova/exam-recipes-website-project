@@ -29,14 +29,15 @@ To start Flavor Fiesta on your machine, follow these steps:
 
 1. Clone the repository.
 2. Install dependencies using `npm i`.
-3. Setup backend server:
+3. Install react icons using `npm install react-icons font-awesome`.
+4. Setup backend server:
   - Open a terminal and navigate to the `server` directory;
   - Open `src` folder;
   - Start server using `npm start`. The server will run at [http://localhost:3001](http://localhost:3001).
-4. Setup the frontend server:
+5. Setup the frontend server:
   - Open another terminal and navigate to the `client` directory;
   - Start server using `npm start`. The server will run at [http://localhost:3000](http://localhost:3000).
-5. Open your browser and visit [http://localhost:3000](http://localhost:3000) to access Flavor Fiesta.
+6. Open your browser and visit [http://localhost:3000](http://localhost:3000) to access Flavor Fiesta.
 
 ## Technologies used
 
