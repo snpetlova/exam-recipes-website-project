@@ -7,13 +7,13 @@ import { recipesRouter } from "./routes/recipes.js";
 
 const app = express();
 
-app.use(
-  cors({
-    origin: ["http://flavor-fiesta.vercel.app"],
-    methods: ["POST", "GET", "PUT", "PATCH", "DELETE", "HEAD"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["http://flavor-fiesta.vercel.app"],
+//     methods: ["POST", "GET", "PUT", "PATCH", "DELETE", "HEAD"],
+//     credentials: true,
+//   })
+// );
 
 app.use(express.json()); //converts data from the front-end to json
 app.use(cors()); //restrict web pages from making requests to a different domain than the one that served the web page
