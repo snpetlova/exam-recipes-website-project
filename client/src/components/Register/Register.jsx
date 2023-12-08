@@ -10,7 +10,7 @@ import Alert from "react-bootstrap/Alert";
 import "./Register.css";
 
 export const Register = () => {
-  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
+  const baseURL = `http://localhost:3001`; //`https://flavor-fiesta.vercel.app`; 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 
 export const Home = () => {
-  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
+  const baseURL = `http://localhost:3001`; //`https://flavor-fiesta.vercel.app`; 
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
   const [cookies, _] = useCookies(["access_token"]);

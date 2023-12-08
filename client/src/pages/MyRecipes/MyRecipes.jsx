@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import { getUserId } from "../../hooks/getUserId";
 
 const MyRecipes = () => {
-  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
+  const baseURL = `http://localhost:3001`; //`https://flavor-fiesta.vercel.app`; 
   const [userRecipes, setUserRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 

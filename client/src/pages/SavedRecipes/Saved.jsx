@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import "./Saved.css";
 
 function Saved() {
-  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
+  const baseURL = `http://localhost:3001`; //`https://flavor-fiesta.vercel.app`; 
   const [savedRecipes, setSavedRecipes] = useState([]);
   const [cookies, _] = useCookies(["access_token"]);
   const userId = getUserId();
