@@ -9,7 +9,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://flavor-fiesta.vercel.app/"],
+    origin: ["https://flavor-fiesta-fe.vercel.app/"],
     methods: ["POST", "GET", "PUT", "PATCH", "DELETE", "HEAD"],
     credentials: true,
   })

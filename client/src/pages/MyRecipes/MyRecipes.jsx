@@ -17,7 +17,7 @@ const MyRecipes = () => {
         const userId = getUserId();
 
         const response = await axios.get(
-          `https://flavor-fiesta-fe.vercel.app/recipes/recipes/${userId}`
+          `https://flavor-fiesta.vercel.app/recipes/recipes/${userId}`
         );
         setUserRecipes(response.data);
       } catch (error) {

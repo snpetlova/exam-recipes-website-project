@@ -52,7 +52,7 @@ export const Register = () => {
     }
 
     try {
-      await axios.post("https://flavor-fiesta-fe.vercel.app/auth/register", {
+      await axios.post("https://flavor-fiesta.vercel.app/auth/register", {
         username,
         email,
         password,

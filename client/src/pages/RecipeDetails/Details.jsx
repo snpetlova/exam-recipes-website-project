@@ -25,7 +25,7 @@ export const Details = (onDelete) => {
 
   const fetchRecipes = async () => {
     try {
-      const response = await axios.get("https://flavor-fiesta-fe.vercel.app/recipes");
+      const response = await axios.get("https://flavor-fiesta.vercel.app/recipes");
       setRecipes(response.data);
     } catch (error) {
       console.log(error);
@@ -35,7 +35,7 @@ export const Details = (onDelete) => {
   const fetchSavedRecipes = async () => {
     try {
       const response = await axios.get(
-        `https://flavor-fiesta-fe.vercel.app/recipes/savedRecipes/ids/${userId}`
+        `https://flavor-fiesta.vercel.app/recipes/savedRecipes/ids/${userId}`
       );
       setSavedRecipes(response.data.savedRecipes);
     } catch (err) {
@@ -46,7 +46,7 @@ export const Details = (onDelete) => {
   const fetchRecipeDetails = async () => {
     try {
       const response = await axios.get(
-        `https://flavor-fiesta-fe.vercel.app/recipes/${recipeId}`
+        `https://flavor-fiesta.vercel.app/recipes/${recipeId}`
       );
       setRecipe(response.data);
     } catch (error) {
@@ -79,7 +79,7 @@ export const Details = (onDelete) => {
   const saveRecipe = async (recipeId) => {
     try {
       const response = await axios.put(
-        "https://flavor-fiesta-fe.vercel.app/recipes",
+        "https://flavor-fiesta.vercel.app/recipes",
         {
           recipeId,
           userId,
@@ -95,7 +95,7 @@ export const Details = (onDelete) => {
 
   const unsaveRecipe = async (recipeId) => {
     try {
-      const response = await axios.delete("https://flavor-fiesta-fe.vercel.app/recipes", {
+      const response = await axios.delete("https://flavor-fiesta.vercel.app/recipes", {
         data: { recipeId, userId },
         headers: { authorization: cookies.access_token },
       });
@@ -120,7 +120,7 @@ export const Details = (onDelete) => {
       const userId = localStorage.getItem("userId");
       setDeleting(true);
 
-      await axios.delete(`https://flavor-fiesta-fe.vercel.app/recipes/${recipeIdToDelete}`, {
+      await axios.delete(`https://flavor-fiesta.vercel.app/recipes/${recipeIdToDelete}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
