@@ -60,7 +60,7 @@ export const Edit = ({ onEdit }) => {
     const fetchRecipeData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/recipes/${recipeId}`
+          `https://flavor-fiesta-fe.vercel.app/recipes/${recipeId}`
         );
 
         // Check if the authenticated user is the owner of the recipe
@@ -121,7 +121,7 @@ export const Edit = ({ onEdit }) => {
       const userId = localStorage.getItem("userId");
 
       await axios.put(
-        `http://localhost:3001/recipes/${recipeId}`,
+        `https://flavor-fiesta-fe.vercel.app/recipes/${recipeId}`,
         editedRecipe,
         {
           headers: {

@@ -31,7 +31,7 @@ function Saved() {
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/recipes/savedRecipes/${userId}`
+          `https://flavor-fiesta-fe.vercel.app/recipes/savedRecipes/${userId}`
         );
         setSavedRecipes(response.data.savedRecipes);
       } catch (error) {
@@ -44,7 +44,7 @@ function Saved() {
 
   const unsaveRecipe = async (recipeId) => {
     try {
-      const response = await axios.delete("http://localhost:3001/recipes", {
+      const response = await axios.delete("https://flavor-fiesta-fe.vercel.app/recipes", {
         data: { recipeId, userId },
         headers: { authorization: cookies.access_token },
       });

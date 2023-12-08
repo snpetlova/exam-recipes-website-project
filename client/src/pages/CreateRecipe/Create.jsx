@@ -112,7 +112,7 @@ function Create() {
     }
 
     try {
-      await axios.post("http://localhost:3001/recipes", recipe, {
+      await axios.post("https://flavor-fiesta-fe.vercel.app/recipes", recipe, {
         headers: { authorization: cookies.access_token },
       });
       alert("Recipe Created!");
