@@ -21,13 +21,27 @@ app.use(cors()); //restrict web pages from making requests to a different domain
 app.use("/auth", userRouter);
 app.use("/recipes", recipesRouter);
 
-const dbUsername = encodeURIComponent("snpetlova");
-const dbPassword = encodeURIComponent("projectPassword123");
-const dbName = "recepies";
+// const dbUsername = encodeURIComponent("snpetlova");
+// const dbPassword = encodeURIComponent("projectPassword123");
+// const dbName = "recepies";
+
+// mongoose.connect(
+//   `mongodb+srv://${dbUsername}:${dbPassword}@recepies.b2ae3ky.mongodb.net/recepies?retryWrites=true&w=majority`
+// );
 
 mongoose.connect(
-  `mongodb+srv://${dbUsername}:${dbPassword}@recepies.b2ae3ky.mongodb.net/recepies?retryWrites=true&w=majority`
-);
+  `mongodb+srv://snpetlova:projectPassword123@recepies.b2ae3ky.mongodb.net/recepies?retryWrites=true&w=majority`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+)
+.then(() => {
+  console.log('Connected to MongoDB');
+})
+.catch((error) => {
+  console.error('Error connecting to MongoDB:', error);
+});;
 
 const PORT = 3001;
 app.listen(PORT, () => {
