@@ -21,8 +21,16 @@ app.use(cors()); //restrict web pages from making requests to a different domain
 app.use("/auth", userRouter);
 app.use("/recipes", recipesRouter);
 
-const dbUsername = encodeURIComponent("snpetlova");
-const dbPassword = encodeURIComponent("projectPassword123");
+console.log("Vercel Environment Variables:");
+console.log("Vercel dbUsername:", process.env.DB_USERNAME);
+console.log("Vercel dbPassword:", process.env.DB_PASSWORD);
+
+const dbUsername = encodeURIComponent(process.env.DB_USERNAME || "snpetlova");
+const dbPassword = encodeURIComponent(process.env.DB_PASSWORD || "projectPassword123");
+
+
+// const dbUsername = encodeURIComponent("snpetlova");
+// const dbPassword = encodeURIComponent("projectPassword123");
 mongoose.connect(
   `mongodb+srv://${dbUsername}:${dbPassword}@recepies.b2ae3ky.mongodb.net/recepies?retryWrites=true&w=majority`
 );
