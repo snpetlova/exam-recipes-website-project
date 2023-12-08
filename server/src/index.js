@@ -16,7 +16,7 @@ app.use(
 );
 
 app.use(express.json()); //converts data from the front-end to json
-app.use(cors()); //restrict web pages from making requests to a different domain than the one that served the web page
+//app.use(cors()); //restrict web pages from making requests to a different domain than the one that served the web page
 
 app.use("/auth", userRouter);
 app.use("/recipes", recipesRouter);
