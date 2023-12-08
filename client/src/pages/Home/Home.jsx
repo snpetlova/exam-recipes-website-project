@@ -21,7 +21,7 @@ export const Home = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get("https://flavor-fiesta-fe.vercel.app/recipes");
+        const response = await axios.get("https://flavor-fiesta.vercel.app/recipes");
         setRecipes(response.data);
       } catch (error) {
         console.log(error);
@@ -31,7 +31,7 @@ export const Home = () => {
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `https://flavor-fiesta-fe.vercel.app/recipes/savedRecipes/ids/${userId}`
+          `https://flavor-fiesta.vercel.app/recipes/savedRecipes/ids/${userId}`
         );
         setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
@@ -46,7 +46,7 @@ export const Home = () => {
   const saveRecipe = async (recipeId) => {
     try {
       const response = await axios.put(
-        "https://flavor-fiesta-fe.vercel.app/recipes",
+        "https://flavor-fiesta.vercel.app/recipes",
         {
           recipeId,
           userId,
@@ -62,7 +62,7 @@ export const Home = () => {
 
   const unsaveRecipe = async (recipeId) => {
     try {
-      const response = await axios.delete("https://flavor-fiesta-fe.vercel.app/recipes", {
+      const response = await axios.delete("https://flavor-fiesta.vercel.app/recipes", {
         data: { recipeId, userId },
         headers: { authorization: cookies.access_token },
       });

@@ -24,7 +24,7 @@ export const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://flavor-fiesta-fe.vercel.app/auth/login", {
+      const response = await axios.post("https://flavor-fiesta.vercel.app/auth/login", {
         username,
         password,
       });
