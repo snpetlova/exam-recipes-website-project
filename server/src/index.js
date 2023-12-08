@@ -31,10 +31,6 @@ app.use("/recipes", recipesRouter);
 
 mongoose.connect(
   `mongodb+srv://snpetlova:projectPassword123@recepies.b2ae3ky.mongodb.net/recepies?retryWrites=true&w=majority`,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
 )
 .then(() => {
   console.log('Connected to MongoDB');
