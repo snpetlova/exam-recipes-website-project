@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import { getUserId } from "../../hooks/getUserId";
 
 const MyRecipes = () => {
+  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
   const [userRecipes, setUserRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -17,7 +18,7 @@ const MyRecipes = () => {
         const userId = getUserId();
 
         const response = await axios.get(
-          `https://flavor-fiesta.vercel.app/recipes/recipes/${userId}`
+          `${baseURL}/recipes/recipes/${userId}`
         );
         setUserRecipes(response.data);
       } catch (error) {

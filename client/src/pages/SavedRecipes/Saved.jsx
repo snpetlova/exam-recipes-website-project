@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import "./Saved.css";
 
 function Saved() {
+  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
   const [savedRecipes, setSavedRecipes] = useState([]);
   const [cookies, _] = useCookies(["access_token"]);
   const userId = getUserId();
@@ -31,7 +32,7 @@ function Saved() {
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `https://flavor-fiesta.vercel.app/recipes/savedRecipes/${userId}`
+          `${baseURL}/recipes/savedRecipes/${userId}`
         );
         setSavedRecipes(response.data.savedRecipes);
       } catch (error) {
@@ -44,7 +45,7 @@ function Saved() {
 
   const unsaveRecipe = async (recipeId) => {
     try {
-      const response = await axios.delete("https://flavor-fiesta.vercel.app/recipes", {
+      const response = await axios.delete(`${baseURL}/recipes`, {
         data: { recipeId, userId },
         headers: { authorization: cookies.access_token },
       });

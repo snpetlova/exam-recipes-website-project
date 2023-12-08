@@ -10,6 +10,7 @@ import Alert from "react-bootstrap/Alert";
 import "./Create.css";
 
 function Create() {
+  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
   const navigate = useNavigate();
   const { state } = useAuth();
 
@@ -112,7 +113,7 @@ function Create() {
     }
 
     try {
-      await axios.post("https://flavor-fiesta.vercel.app/recipes", recipe, {
+      await axios.post(`${baseURL}/recipes`, recipe, {
         headers: { authorization: cookies.access_token },
       });
       alert("Recipe Created!");

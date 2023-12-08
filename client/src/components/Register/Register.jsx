@@ -10,6 +10,7 @@ import Alert from "react-bootstrap/Alert";
 import "./Register.css";
 
 export const Register = () => {
+  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,7 +53,7 @@ export const Register = () => {
     }
 
     try {
-      await axios.post("https://flavor-fiesta.vercel.app/auth/register", {
+      await axios.post(`${baseURL}/auth/register`, {
         username,
         email,
         password,

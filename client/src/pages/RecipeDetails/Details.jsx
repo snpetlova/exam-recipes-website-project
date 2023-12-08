@@ -9,6 +9,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import "./Details.css";
 
 export const Details = (onDelete) => {
+  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [recipes, setRecipes] = useState([]);
@@ -25,7 +26,7 @@ export const Details = (onDelete) => {
 
   const fetchRecipes = async () => {
     try {
-      const response = await axios.get("https://flavor-fiesta.vercel.app/recipes");
+      const response = await axios.get(`${baseURL}/recipes`);
       setRecipes(response.data);
     } catch (error) {
       console.log(error);
@@ -35,7 +36,7 @@ export const Details = (onDelete) => {
   const fetchSavedRecipes = async () => {
     try {
       const response = await axios.get(
-        `https://flavor-fiesta.vercel.app/recipes/savedRecipes/ids/${userId}`
+        `${baseURL}/recipes/savedRecipes/ids/${userId}`
       );
       setSavedRecipes(response.data.savedRecipes);
     } catch (err) {
@@ -46,7 +47,7 @@ export const Details = (onDelete) => {
   const fetchRecipeDetails = async () => {
     try {
       const response = await axios.get(
-        `https://flavor-fiesta.vercel.app/recipes/${recipeId}`
+        `${baseURL}/recipes/${recipeId}`
       );
       setRecipe(response.data);
     } catch (error) {
@@ -79,7 +80,7 @@ export const Details = (onDelete) => {
   const saveRecipe = async (recipeId) => {
     try {
       const response = await axios.put(
-        "https://flavor-fiesta.vercel.app/recipes",
+        `${baseURL}/recipes`,
         {
           recipeId,
           userId,
@@ -95,7 +96,7 @@ export const Details = (onDelete) => {
 
   const unsaveRecipe = async (recipeId) => {
     try {
-      const response = await axios.delete("https://flavor-fiesta.vercel.app/recipes", {
+      const response = await axios.delete(`${baseURL}/recipes`, {
         data: { recipeId, userId },
         headers: { authorization: cookies.access_token },
       });
@@ -120,7 +121,7 @@ export const Details = (onDelete) => {
       const userId = localStorage.getItem("userId");
       setDeleting(true);
 
-      await axios.delete(`https://flavor-fiesta.vercel.app/recipes/${recipeIdToDelete}`, {
+      await axios.delete(`${baseURL}/recipes/${recipeIdToDelete}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

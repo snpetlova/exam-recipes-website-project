@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 
 export const Home = () => {
+  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
   const [cookies, _] = useCookies(["access_token"]);
@@ -21,7 +22,7 @@ export const Home = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get("https://flavor-fiesta.vercel.app/recipes");
+        const response = await axios.get(`${baseURL}/recipes`);
         setRecipes(response.data);
       } catch (error) {
         console.log(error);
@@ -31,7 +32,7 @@ export const Home = () => {
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `https://flavor-fiesta.vercel.app/recipes/savedRecipes/ids/${userId}`
+          `${baseURL}/recipes/savedRecipes/ids/${userId}`
         );
         setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
@@ -46,7 +47,7 @@ export const Home = () => {
   const saveRecipe = async (recipeId) => {
     try {
       const response = await axios.put(
-        "https://flavor-fiesta.vercel.app/recipes",
+        `${baseURL}/recipes`,
         {
           recipeId,
           userId,
@@ -62,7 +63,7 @@ export const Home = () => {
 
   const unsaveRecipe = async (recipeId) => {
     try {
-      const response = await axios.delete("https://flavor-fiesta.vercel.app/recipes", {
+      const response = await axios.delete(`${baseURL}/recipes`, {
         data: { recipeId, userId },
         headers: { authorization: cookies.access_token },
       });

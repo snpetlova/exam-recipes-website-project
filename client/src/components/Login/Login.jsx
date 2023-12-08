@@ -10,6 +10,7 @@ import Alert from "react-bootstrap/Alert";
 import './Login.css';
 
 export const Login = () => {
+  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("");
@@ -24,7 +25,7 @@ export const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://flavor-fiesta.vercel.app/auth/login", {
+      const response = await axios.post(`${baseURL}/auth/login`, {
         username,
         password,
       });

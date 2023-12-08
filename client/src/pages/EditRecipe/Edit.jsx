@@ -9,6 +9,7 @@ import Alert from "react-bootstrap/Alert";
 import "./Edit.css";
 
 export const Edit = ({ onEdit }) => {
+  const baseURL = `https://flavor-fiesta.vercel.app`; //`http://localhost:3001`; 
   const { recipeId } = useParams();
   const navigate = useNavigate();
   const { state } = useAuth();
@@ -60,7 +61,7 @@ export const Edit = ({ onEdit }) => {
     const fetchRecipeData = async () => {
       try {
         const response = await axios.get(
-          `https://flavor-fiesta.vercel.app/recipes/${recipeId}`
+          `${baseURL}/recipes/${recipeId}`
         );
 
         // Check if the authenticated user is the owner of the recipe
@@ -121,7 +122,7 @@ export const Edit = ({ onEdit }) => {
       const userId = localStorage.getItem("userId");
 
       await axios.put(
-        `https://flavor-fiesta.vercel.app/recipes/${recipeId}`,
+        `${baseURL}/recipes/${recipeId}`,
         editedRecipe,
         {
           headers: {
